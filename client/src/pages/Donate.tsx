@@ -41,17 +41,14 @@ export default function Donate() {
   const donationCategories = [
     {
       title: "Rescue & Medical Care",
-      percentage: 60,
       description: "Emergency response, veterinary treatment, and rehabilitation.",
     },
     {
       title: "Food & Shelter",
-      percentage: 30,
       description: "Daily nutrition and safe shelter facilities.",
     },
     {
       title: "Awareness & Community",
-      percentage: 10,
       description: "Education and community engagement programs.",
     },
   ];
@@ -236,14 +233,12 @@ export default function Donate() {
                 {donationCategories.map((cat, idx) => (
                   <label key={idx} className="flex items-center gap-2">
                     <input type="radio" name="category" className="w-4 h-4" />
-                    <span className="text-foreground">{cat.title} ({cat.percentage}%)</span>
+                    <span className="text-foreground">{cat.title}</span>
                   </label>
                 ))}
               </div>
             </div>
-            <div className="mb-6 p-4 rounded-xl bg-secondary/50 border border-border text-sm text-foreground/80">
-              Donation breakdown: 60% rescue & medical care, 30% food & shelter, 10% awareness & community education.
-            </div>
+            {/* Financial breakdown removed per content update */}
 
             {/* Donor Info */}
             <div className="mb-6 space-y-4">
@@ -289,31 +284,7 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* Fund Allocation */}
-      <section className="py-12 md:py-16 bg-background">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">How We Use Your Donations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {donationCategories.map((cat, idx) => (
-              <Card key={idx} className="p-6 border-border">
-                <div className="mb-4">
-                  <div className="flex items-end justify-between mb-2">
-                    <h3 className="font-bold text-foreground">{cat.title}</h3>
-                    <span className="text-2xl font-bold text-primary">{cat.percentage}%</span>
-                  </div>
-                  <div className="w-full bg-border rounded-full h-2">
-                    <div
-                      className="bg-primary h-2 rounded-full"
-                      style={{ width: `${cat.percentage}%` }}
-                    ></div>
-                  </div>
-                </div>
-                <p className="text-foreground/70 text-sm">{cat.description}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Fund allocation section removed per content update */}
 
       {/* Other Ways to Help */}
       <section className="py-12 md:py-16 bg-white">

@@ -59,7 +59,8 @@
   --background: #FAF3EA;
   --foreground: #1E2E28;
   --card: #FFFFFF;
-  --card-foreground: #1E2E28;
+  --card: #123826; /* deep forest green for major cards */
+  --card-foreground: #F7EFE6; /* warm off-white text inside cards */
   --popover: #FFFFFF;
   --popover-foreground: #1E2E28;
   --secondary: #E8D8C4;
@@ -69,6 +70,7 @@
   --destructive: #B24C35;
   --destructive-foreground: #F7EFE6;
   --border: #D7C9B7;
+  --card-border: rgba(255,255,255,0.08);
   --input: #FFFFFF;
   --ring: #184833;
   --sidebar: #F7EFE6;
@@ -176,6 +178,23 @@
   h3 {
     @apply text-2xl md:text-3xl font-semibold;
   }
+}
+
+/* Ensure card context inverts common color variables for utilities inside cards */
+[data-slot="card"] {
+  background-color: var(--card) !important;
+  color: var(--card-foreground) !important;
+  --foreground: var(--card-foreground);
+  --primary: var(--card-foreground);
+  --secondary: var(--card-foreground);
+  --muted-foreground: var(--card-foreground);
+  --border: var(--card-border);
+}
+
+/* CTA buttons should remain visible on dark cards */
+[data-slot="card"] .btn-cta, [data-slot="card"] .button-cta {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
 }
 
 @layer components {

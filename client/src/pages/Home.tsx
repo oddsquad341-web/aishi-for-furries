@@ -67,27 +67,28 @@ export default function Home() {
   const journey = [
     {
       year: "2017",
-      title: "Began with Passion",
+      title: "Aashima's Journey Begins",
       description:
-        "Aashi's journey started with two community dogs, and compassionate care quickly became a trusted rescue mission.",
+        "Two community dogs sparked a mission that would eventually transform hundreds of lives.",
+      icon: "🐾",
     },
     {
       year: "2020",
       title: "COVID Response",
-      description:
-        "Feeding and rescue intensified as stray dogs lost access to food and medical help during the pandemic.",
+      description: "While the world shut down, rescue and feeding efforts intensified.",
+      icon: "🍲",
     },
     {
       year: "2024",
-      title: "Shelter Established",
-      description:
-        "A dedicated boarding facility opened, providing shelter for senior, paralysed, and trauma-affected dogs.",
+      title: "Permanent Shelter",
+      description: "A dedicated sanctuary opened for senior, injured, and paralysed animals.",
+      icon: "🏠",
     },
     {
       year: "2025",
       title: "Registered NGO",
-      description:
-        "Aishi For Furries became a registered NGO, expanding impact with transparency and long-term care.",
+      description: "Aishi For Furries became a registered organisation, expanding impact and long-term care.",
+      icon: "🏛️",
     },
   ];
 
@@ -138,9 +139,9 @@ export default function Home() {
               const Icon = stat.icon;
               return (
                 <Card key={idx} className="p-6 text-center hover:shadow-lg transition-shadow">
-                  <Icon className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                  <p className="text-foreground font-medium">{stat.label}</p>
+                  <Icon className="w-12 h-12 mx-auto mb-4" style={{ color: 'var(--card-foreground)' }} />
+                  <div className="text-3xl font-bold mb-2" style={{ color: 'var(--card-foreground)' }}>{stat.number}</div>
+                  <p className="font-medium" style={{ color: 'var(--card-foreground)' }}>{stat.label}</p>
                 </Card>
               );
             })}
@@ -237,14 +238,36 @@ export default function Home() {
           <p className="text-center text-foreground/80 mb-12 max-w-2xl mx-auto">
             Comprehensive care across rescue, medical support, shelter, prevention, and community feeding.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pillars.map((pillar, idx) => (
-              <Card key={idx} className="p-6 hover:shadow-lg transition-shadow border-border">
-                <div className="text-4xl mb-4">{pillar.icon}</div>
-                <h3 className="text-xl font-bold text-foreground mb-2">{pillar.title}</h3>
-                <p className="text-foreground/70">{pillar.description}</p>
-              </Card>
-            ))}
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              {pillars.slice(0, 3).map((pillar, idx) => {
+                return (
+                  <Card key={idx} className={`p-6 hover:shadow-lg transition-shadow border-2`}>
+                    <h3 className="text-xl font-bold mb-2 flex items-center" style={{ color: 'var(--card-foreground)' }}>
+                      <span className="text-2xl mr-3 align-middle">{pillar.icon}</span>
+                      {pillar.title}
+                    </h3>
+                    <p style={{ color: 'var(--card-foreground)', opacity: 0.9 }}>{pillar.description}</p>
+                  </Card>
+                );
+              })}
+            </div>
+
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
+                {pillars.slice(3).map((pillar, idx) => {
+                  return (
+                    <Card key={idx} className={`p-6 hover:shadow-lg transition-shadow border-2`}>
+                      <h3 className="text-xl font-bold mb-2 flex items-center" style={{ color: 'var(--card-foreground)' }}>
+                        <span className="text-2xl mr-3 align-middle">{pillar.icon}</span>
+                        {pillar.title}
+                      </h3>
+                      <p style={{ color: 'var(--card-foreground)', opacity: 0.9 }}>{pillar.description}</p>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -276,18 +299,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Journey Section */}
-      <section className="py-12 md:py-16 bg-background">
+      {/* Journey Section - Premium Timeline */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: '#FBF7EE' }}>
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Our Journey</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {journey.map((item) => (
-              <Card key={item.year} className="p-6 border-border bg-white shadow-sm">
-                <div className="text-primary text-2xl font-bold mb-2">{item.year}</div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">{item.title}</h3>
-                <p className="text-foreground/70 leading-relaxed">{item.description}</p>
-              </Card>
-            ))}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-emerald-900">Our Journey</h2>
+          <p className="text-center text-foreground/80 mb-10 max-w-2xl mx-auto">
+            Moments that shaped our mission — milestones of compassion, resilience, and growth.
+          </p>
+
+          <div className="relative">
+            {/* connecting line */}
+            <div className="hidden md:block absolute left-0 right-0 top-1/2 transform -translate-y-1/2">
+              <div className="h-1 bg-emerald-200/60 rounded-full mx-auto" style={{ maxWidth: '100%' }} />
+            </div>
+
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-8 md:gap-0">
+              {journey.map((item, idx) => {
+                const up = idx % 2 === 0;
+                return (
+                  <div
+                    key={item.year}
+                    className={`md:w-1/4 flex flex-col items-center md:items-start md:relative ${up ? 'md:-translate-y-6' : 'md:translate-y-6'}`}
+                  >
+                    <div className="relative z-10 flex flex-col items-center md:items-center text-center md:text-center">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-full bg-emerald-900 text-white flex items-center justify-center text-2xl shadow-md">
+                          {item.icon}
+                        </div>
+                        <div className="text-emerald-900 font-bold text-lg">{item.year}</div>
+                      </div>
+                      <div className="max-w-xs bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-transform transform hover:-translate-y-1">
+                        <h3 className="text-xl font-semibold text-foreground flex items-center justify-center md:justify-center">
+                          {item.title}
+                        </h3>
+                        <p className="text-foreground/70 mt-2">{item.description}</p>
+                      </div>
+                    </div>
+                    {/* node on line */}
+                    <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-4 h-4 bg-emerald-900 rounded-full shadow" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

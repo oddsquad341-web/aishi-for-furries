@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/aishi/raw/1.png";
+import logo from "@/assets/aishi/raw/circularlogo.png";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);

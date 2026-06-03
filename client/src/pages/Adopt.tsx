@@ -25,7 +25,7 @@ export default function Adopt() {
     {
       number: "4",
       title: "Home Visit",
-      description: "Our team may visit your home to ensure a safe and loving environment.",
+      description: "Our team will visit your home to ensure a safe and loving environment.",
     },
     {
       number: "5",
@@ -188,7 +188,7 @@ export default function Adopt() {
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link href="/donate">
                   <a>
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                    <Button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white">
                       Virtually Foster a Dog
                     </Button>
                   </a>
@@ -198,13 +198,13 @@ export default function Adopt() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button variant="outline" className="w-full border-primary text-primary">
+                  <Button variant="outline" className="w-full border-emerald-700 text-emerald-700 hover:bg-emerald-50">
                     Home Foster / Adopt
                   </Button>
                 </a>
                 <Link href="/donate">
                   <a>
-                    <Button variant="outline" className="w-full border-primary text-primary">
+                    <Button variant="outline" className="w-full border-emerald-700 text-emerald-700 hover:bg-emerald-50">
                       Donate for Medical Care
                     </Button>
                   </a>
@@ -222,26 +222,46 @@ export default function Adopt() {
         </div>
       </section>
 
-      {/* Requirements */}
-      <section className="py-12 md:py-16 bg-white">
+      {/* Requirements - Premium Checklist */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: '#FBF7EE' }}>
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Adoption Requirements</h2>
-          <div className="max-w-3xl mx-auto space-y-4">
-            <Card className="p-6 border-border">
-              <h3 className="font-bold text-foreground mb-2">Home Environment</h3>
-              <p className="text-foreground/70">A safe, secure space where the dog can thrive. Indoor or outdoor space depending on the dog's needs.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-emerald-900">Adoption Requirements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <Card className="p-6 border-2 border-emerald-200 bg-white hover:shadow-lg transition-all">
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">🏡</div>
+                <div>
+                  <h3 className="font-bold text-emerald-900 mb-2">Home Environment</h3>
+                  <p className="text-foreground/70 text-sm">A safe, secure space where the dog can thrive. Indoor or outdoor space depending on the dog's needs.</p>
+                </div>
+              </div>
             </Card>
-            <Card className="p-6 border-border">
-              <h3 className="font-bold text-foreground mb-2">Commitment</h3>
-              <p className="text-foreground/70">A genuine commitment to providing lifelong care, including medical attention, nutrition, and love.</p>
+            <Card className="p-6 border-2 border-emerald-200 bg-white hover:shadow-lg transition-all">
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">💚</div>
+                <div>
+                  <h3 className="font-bold text-emerald-900 mb-2">Commitment</h3>
+                  <p className="text-foreground/70 text-sm">Genuine commitment to providing lifelong care, including medical attention, nutrition, and love.</p>
+                </div>
+              </div>
             </Card>
-            <Card className="p-6 border-border">
-              <h3 className="font-bold text-foreground mb-2">Time & Attention</h3>
-              <p className="text-foreground/70">Time to help the dog adjust, socialize, and bond with your family.</p>
+            <Card className="p-6 border-2 border-emerald-200 bg-white hover:shadow-lg transition-all">
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">⏰</div>
+                <div>
+                  <h3 className="font-bold text-emerald-900 mb-2">Time & Attention</h3>
+                  <p className="text-foreground/70 text-sm">Time to help the dog adjust, socialize, and bond with your family through daily interaction.</p>
+                </div>
+              </div>
             </Card>
-            <Card className="p-6 border-border">
-              <h3 className="font-bold text-foreground mb-2">Veterinary Care</h3>
-              <p className="text-foreground/70">Willingness to provide ongoing medical care, vaccinations, and emergency treatment as needed.</p>
+            <Card className="p-6 border-2 border-emerald-200 bg-white hover:shadow-lg transition-all">
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">🏥</div>
+                <div>
+                  <h3 className="font-bold text-emerald-900 mb-2">Veterinary Care</h3>
+                  <p className="text-foreground/70 text-sm">Willingness to provide ongoing medical care, vaccinations, and emergency treatment as needed.</p>
+                </div>
+              </div>
             </Card>
           </div>
         </div>

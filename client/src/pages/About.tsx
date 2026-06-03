@@ -94,37 +94,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Registration & Trust */}
-      <section className="py-12 md:py-16 bg-background">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Trust & Transparency</h2>
-          <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg border border-border">
-            <p className="text-foreground/80 leading-relaxed mb-4">
-              Aishi For Furries is a <strong>registered NGO in Gurgaon, Haryana</strong>, committed to full transparency in our operations and financial management.
-            </p>
-            <p className="text-foreground/80 leading-relaxed mb-4">
-              Our funding is allocated as follows:
-            </p>
-            <ul className="space-y-2 text-foreground/80 mb-4">
-              <li className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-primary rounded-full"></span>
-                <strong>60%</strong> - Rescue & Medical Care
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-accent rounded-full"></span>
-                <strong>30%</strong> - Food & Shelter
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-secondary rounded-full"></span>
-                <strong>10%</strong> - Awareness & Community Engagement
-              </li>
-            </ul>
-            <p className="text-foreground/80 leading-relaxed">
-              We believe in earning your trust through consistent, measurable impact and honest communication about our work.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Registration & Trust: removed financial transparency block per content update */}
     </div>
   );
 }

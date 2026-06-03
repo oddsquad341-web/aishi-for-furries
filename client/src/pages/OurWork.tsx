@@ -88,8 +88,10 @@ export default function OurWork() {
             <div key={idx} className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${idx % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
               {/* Content */}
               <div className={idx % 2 === 1 ? "md:order-2" : ""}>
-                <div className="text-5xl mb-4">{program.icon}</div>
-                <h2 className="text-3xl font-bold mb-4 text-foreground">{program.title}</h2>
+                <h2 className="text-3xl font-bold mb-4 text-foreground flex items-center">
+                  <span className="text-5xl mr-3 align-middle">{program.icon}</span>
+                  {program.title}
+                </h2>
                 <p className="text-lg text-foreground/80 mb-6">{program.description}</p>
                 <ul className="space-y-3">
                   {program.details.map((detail, didx) => (
@@ -114,26 +116,7 @@ export default function OurWork() {
         </div>
       </section>
 
-      {/* Impact Summary */}
-      <section className="py-12 md:py-16 bg-background">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Our Collective Impact</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-8 text-center border-border">
-              <div className="text-4xl font-bold text-primary mb-2">500+</div>
-              <p className="text-foreground/70">Medical cases treated</p>
-            </Card>
-            <Card className="p-8 text-center border-border">
-              <div className="text-4xl font-bold text-primary mb-2">150+</div>
-              <p className="text-foreground/70">Dogs fed daily</p>
-            </Card>
-            <Card className="p-8 text-center border-border">
-              <div className="text-4xl font-bold text-primary mb-2">90+</div>
-              <p className="text-foreground/70">Dogs neutered</p>
-            </Card>
-          </div>
-        </div>
-      </section>
+      {/* Collective Impact section removed per content update */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import logo from "@/assets/aishi/raw/circularlogo.png";
 
 export default function Footer() {
   return (
@@ -8,8 +9,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>
-            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <span className="text-2xl">🐾</span>
+            <h3 className="text-lg font-bold mb-4 flex items-center gap-3">
+              <img src={logo} alt="Aishi For Furries" className="h-8 w-8 object-contain" />
               Aishi For Furries
             </h3>
             <p className="text-sm opacity-90">
