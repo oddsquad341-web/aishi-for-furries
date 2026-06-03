@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import OurWork from "./pages/OurWork";
 import Impact from "./pages/Impact";
+import RescueStories from "./pages/RescueStories";
+import RescueStoryDetail from "./pages/RescueStoryDetail";
 import Adopt from "./pages/Adopt";
 import Volunteer from "./pages/Volunteer";
 import Donate from "./pages/Donate";
@@ -24,6 +26,8 @@ function Router() {
         <Route path={"/about"} component={About} />
         <Route path={"/our-work"} component={OurWork} />
         <Route path={"/impact"} component={Impact} />
+        <Route path={"/rescue-stories"} component={RescueStories} />
+        <Route path={"/rescue-stories/:id"} component={RescueStoryDetail} />
         <Route path={"/adopt"} component={Adopt} />
         <Route path={"/volunteer"} component={Volunteer} />
         <Route path={"/donate"} component={Donate} />

@@ -1,4 +1,10 @@
 import { Card } from "@/components/ui/card";
+import lakshmiImage from "@/assets/aishi/raw/6.jpg";
+import narayanImage from "@/assets/aishi/raw/7.jpg";
+import khushiImage from "@/assets/aishi/raw/8.png";
+import blackyImage from "@/assets/aishi/raw/9.png";
+import raniImage from "@/assets/aishi/raw/10.png";
+import adoptionImage from "@/assets/aishi/raw/12.png";
 
 export default function Impact() {
   const metrics = [
@@ -12,19 +18,40 @@ export default function Impact() {
 
   const stories = [
     {
-      title: "From Trauma to Triumph",
-      description: "A dog rescued from a hit-and-run incident with severe injuries, including spinal damage, now thrives with a wheelchair and loving family.",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/adoption-success-RfRFS6bErxVFUFinsVJabG.webp",
+      title: "Lakshmi",
+      description:
+        "Thrown into a 40-ft dry well with severe spinal fractures, Lakshmi now moves with a custom wheelchair and lives with dignity under our care.",
+      image: lakshmiImage,
     },
     {
-      title: "Second Chances Work",
-      description: "A shy street dog, rescued and rehabilitated, found a forever home with a family who saw past the fear to the loving companion within.",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/adoption-success-RfRFS6bErxVFUFinsVJabG.webp",
+      title: "Narayan",
+      description:
+        "Found after a hit-and-run with a damaged spine, Narayan survived because our team refused to give up. Today he feels the sun again in a safe home.",
+      image: narayanImage,
     },
     {
-      title: "Community Impact",
-      description: "Through our feeding program, 150+ community dogs receive daily nutrition, reducing malnutrition and disease in Gurgaon's stray population.",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/feeding-program-oTB5vXxhTZkF7YgTroS.webp",
+      title: "Khushi",
+      description:
+        "Dragging himself across an empty plot with crushing injuries, Khushi received life-saving treatment and now enjoys freedom with supportive care.",
+      image: khushiImage,
+    },
+    {
+      title: "Blacky",
+      description:
+        "Blacky survived two amputations and taught us why consistent community care and responsible feeding matter for every indies' future.",
+      image: blackyImage,
+    },
+    {
+      title: "Rani",
+      description:
+        "A hit-and-run victim with a fractured spine, Rani beat the odds and now walks and runs again, living safely at our shelter for life.",
+      image: raniImage,
+    },
+    {
+      title: "Adoption Story",
+      description:
+        "Rani found a forever family through Aishi For Furries and now thrives as a cherished member of her new home.",
+      image: adoptionImage,
     },
   ];
 

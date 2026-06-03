@@ -1,6 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import adoptionHero from "@/assets/aishi/raw/13.png";
+import fosterHero from "@/assets/aishi/raw/14.png";
+import fosterLifeImage from "@/assets/aishi/raw/17.png";
 
 export default function Adopt() {
   const adoptionSteps = [
@@ -50,7 +53,7 @@ export default function Adopt() {
       {/* Hero Section */}
       <section className="relative h-96 overflow-hidden">
         <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/adoption-success-RfRFS6bErxVFUFinsVJabG.webp"
+          src={adoptionHero}
           alt="Happy adopted family with dog"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -139,8 +142,79 @@ export default function Adopt() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/adoption-success-RfRFS6bErxVFUFinsVJabG.webp"
+                src={fosterHero}
                 alt="Foster family with dog"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Foster a Life Section */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-sm uppercase tracking-[0.32em] text-secondary font-semibold">
+                Foster a Life
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-5 mb-6">
+                Keep a dog safe from the shelter or bring one home.
+              </h2>
+              <p className="text-foreground/80 leading-relaxed mb-8">
+                Choose the support that fits your life: virtual foster care for those who love from afar, or home foster and adoption for those ready to open their doors.
+              </p>
+              <div className="space-y-10">
+                <div>
+                  <h3 className="text-2xl font-semibold text-foreground mb-3">Option 1: Virtual Foster</h3>
+                  <ul className="space-y-3 text-foreground/80">
+                    <li>Contribute monthly or one-time to fund feeding, shelter, medicine, and care.</li>
+                    <li>Aishi For Furries continues to care for the dog at the shelter.</li>
+                    <li>Supporters may receive regular updates about their foster dog.</li>
+                    <li>Best for people who cannot bring a dog home but still want to save a life.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-semibold text-foreground mb-3">Option 2: Home Foster / Adopt</h3>
+                  <ul className="space-y-3 text-foreground/80">
+                    <li>Bring a dog into your home temporarily or permanently.</li>
+                    <li>Temporary fostering supports recovery and helps the dog adjust.</li>
+                    <li>Permanent adoption gives a rescued dog a forever family.</li>
+                    <li>Aishi For Furries provides screening, guidance, and transition support.</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <Link href="/donate">
+                  <a>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                      Virtually Foster a Dog
+                    </Button>
+                  </a>
+                </Link>
+                <a
+                  href="https://adoption.barket.in/foster/aashima-madan-492"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" className="w-full border-primary text-primary">
+                    Home Foster / Adopt
+                  </Button>
+                </a>
+                <Link href="/donate">
+                  <a>
+                    <Button variant="outline" className="w-full border-primary text-primary">
+                      Donate for Medical Care
+                    </Button>
+                  </a>
+                </Link>
+              </div>
+            </div>
+            <div className="relative h-96 rounded-[1.25rem] overflow-hidden shadow-lg">
+              <img
+                src={fosterLifeImage}
+                alt="Foster dog receiving care"
                 className="w-full h-full object-cover"
               />
             </div>

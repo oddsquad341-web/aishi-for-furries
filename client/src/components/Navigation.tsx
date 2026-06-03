@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/aishi/raw/1.png";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +22,8 @@ export default function Navigation() {
       <div className="container flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity">
-            <span className="text-2xl">🐾</span>
+          <a className="flex items-center gap-3 font-bold text-xl text-primary hover:opacity-80 transition-opacity">
+            <img src={logo} alt="Aishi For Furries" className="h-8 md:h-10 object-contain" />
             <span>Aishi For Furries</span>
           </a>
         </Link>

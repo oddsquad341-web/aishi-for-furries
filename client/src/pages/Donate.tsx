@@ -144,7 +144,7 @@ export default function Donate() {
         <div className="container">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Support Our Mission</h1>
           <p className="text-lg opacity-90 max-w-2xl">
-            Every rupee goes directly to rescuing, healing, and caring for Gurgaon's stray animals.
+            A registered NGO transforming compassion into action for Gurgaon's street dogs through rescue, care, and long-term support.
           </p>
         </div>
       </section>
@@ -240,6 +240,9 @@ export default function Donate() {
                   </label>
                 ))}
               </div>
+            </div>
+            <div className="mb-6 p-4 rounded-xl bg-secondary/50 border border-border text-sm text-foreground/80">
+              Donation breakdown: 60% rescue & medical care, 30% food & shelter, 10% awareness & community education.
             </div>
 
             {/* Donor Info */}

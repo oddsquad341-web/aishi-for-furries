@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+import volunteerHero from "@/assets/aishi/raw/15.png";
 
 export default function Volunteer() {
   const [formData, setFormData] = useState({
@@ -91,7 +92,7 @@ export default function Volunteer() {
       {/* Hero Section */}
       <section className="relative h-96 overflow-hidden">
         <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/volunteer-team-LjmuH7Ft7TPGaNkTgto8dw.webp"
+          src={volunteerHero}
           alt="Volunteer team with dogs"
           className="absolute inset-0 w-full h-full object-cover"
         />

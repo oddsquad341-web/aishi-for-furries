@@ -2,6 +2,15 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, Users, Stethoscope, Utensils } from "lucide-react";
+import heroImage from "@/assets/aishi/raw/2.png";
+import founderImage from "@/assets/aishi/raw/0.png";
+import lakshmiImage from "@/assets/aishi/raw/6.jpg";
+import narayanImage from "@/assets/aishi/raw/7.jpg";
+import khushiImage from "@/assets/aishi/raw/8.png";
+import blackyImage from "@/assets/aishi/raw/9.png";
+import raniImage from "@/assets/aishi/raw/10.png";
+import adoptionImage from "@/assets/aishi/raw/12.png";
+import fosterPreview from "@/assets/aishi/raw/53.jpg";
 
 export default function Home() {
   const stats = [
@@ -55,23 +64,50 @@ export default function Home() {
     },
   ];
 
+  const journey = [
+    {
+      year: "2017",
+      title: "Began with Passion",
+      description:
+        "Aashi's journey started with two community dogs, and compassionate care quickly became a trusted rescue mission.",
+    },
+    {
+      year: "2020",
+      title: "COVID Response",
+      description:
+        "Feeding and rescue intensified as stray dogs lost access to food and medical help during the pandemic.",
+    },
+    {
+      year: "2024",
+      title: "Shelter Established",
+      description:
+        "A dedicated boarding facility opened, providing shelter for senior, paralysed, and trauma-affected dogs.",
+    },
+    {
+      year: "2025",
+      title: "Registered NGO",
+      description:
+        "Aishi For Furries became a registered NGO, expanding impact with transparency and long-term care.",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[500px] md:h-[600px] overflow-hidden">
         <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/hero-rescue-dog-HNguHuHDe6yXDaBocNMdRJ.webp"
-          alt="Rescued dog receiving care"
+          src={heroImage}
+          alt="A rescued dog in our care"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative h-full container flex flex-col justify-center items-start">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Transforming Compassion into Action
+            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-4 leading-tight">
+              Transforming compassion into action
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8">
-              Helping stray animals in Gurgaon through rescue, rehabilitation, feeding, and care.
+            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8">
+              Giving every street dog in Gurgaon a chance at life, health, and hope through rescue, rehabilitation, feeding and long-term care.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/donate">
@@ -108,6 +144,88 @@ export default function Home() {
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Stories of Hope Preview */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold">Stories of Hope</h2>
+            <Link href="/rescue-stories"><a className="text-primary font-medium">View all</a></Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="overflow-hidden">
+              <img src={lakshmiImage} alt="Lakshmi" className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">Lakshmi</h3>
+                <p className="text-foreground/70">Spinal injury survivor now living with dignity.</p>
+              </div>
+            </Card>
+            <Card className="overflow-hidden">
+              <img src={narayanImage} alt="Narayan" className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">Narayan</h3>
+                <p className="text-foreground/70">Hit-and-run survivor rehabilitated to freedom.</p>
+              </div>
+            </Card>
+            <Card className="overflow-hidden">
+              <img src={blackyImage} alt="Blacky" className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">Blacky</h3>
+                <p className="text-foreground/70">A brave story of recovery and care.</p>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Foster a Life Preview */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.9fr] gap-10 items-center">
+            <div>
+              <span className="text-sm uppercase tracking-[0.32em] text-secondary font-semibold">
+                Foster a Life
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-5 mb-5">
+                Save a life without changing your address.
+              </h2>
+              <p className="text-foreground/80 leading-relaxed mb-8">
+                Support a rescued dog through a virtual foster or open your home for temporary fostering or adoption. We care for the dog with love, and you help keep hope alive.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <Link href="/adopt">
+                  <a>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                      Virtually Foster a Dog
+                    </Button>
+                  </a>
+                </Link>
+                <Link href="/adopt">
+                  <a>
+                    <Button variant="outline" className="w-full border-primary text-primary">
+                      Home Foster / Adopt
+                    </Button>
+                  </a>
+                </Link>
+                <Link href="/donate">
+                  <a>
+                    <Button variant="outline" className="w-full border-primary text-primary">
+                      Donate for Medical Care
+                    </Button>
+                  </a>
+                </Link>
+              </div>
+            </div>
+            <div className="relative h-96 rounded-[1.25rem] overflow-hidden shadow-lg">
+              <img
+                src={fosterPreview}
+                alt="Foster care for rescued dog"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -149,11 +267,27 @@ export default function Home() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/volunteer-team-LjmuH7Ft7TPGaNkTgto8dw.webp"
-                alt="Aashi For Furries team"
+                src={founderImage}
+                alt="Aashima Madan caring for rescued dogs"
                 className="w-full h-full object-cover"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Journey Section */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Our Journey</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {journey.map((item) => (
+              <Card key={item.year} className="p-6 border-border bg-white shadow-sm">
+                <div className="text-primary text-2xl font-bold mb-2">{item.year}</div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">{item.title}</h3>
+                <p className="text-foreground/70 leading-relaxed">{item.description}</p>
+              </Card>
+            ))}
           </div>
         </div>
       </section>

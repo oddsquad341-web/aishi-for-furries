@@ -1,4 +1,9 @@
 import { Card } from "@/components/ui/card";
+import rescueImage from "@/assets/aishi/raw/18.jpg";
+import medicalImage from "@/assets/aishi/raw/2.png";
+import shelterImage from "@/assets/aishi/raw/3.jpg";
+import vaccinationImage from "@/assets/aishi/raw/4.jpg";
+import feedingImage from "@/assets/aishi/raw/5.jpg";
 
 export default function OurWork() {
   const programs = [
@@ -12,7 +17,7 @@ export default function OurWork() {
         "Field pickups across Gurgaon",
         "Safe transport to shelter and medical facilities",
       ],
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/hero-rescue-dog-HNguHuHDe6yXDaBocNMdRJ.webp",
+      image: rescueImage,
     },
     {
       title: "Medical Care & Rehabilitation",
@@ -24,7 +29,7 @@ export default function OurWork() {
         "Long-term rehabilitation programs",
         "Special care for trauma cases (e.g., wheelchair dogs)",
       ],
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/impact-medical-care-o65XCUxGgKZpUudpPr4dQB.webp",
+      image: medicalImage,
     },
     {
       title: "Shelter & Long-Term Care",
@@ -36,7 +41,7 @@ export default function OurWork() {
         "Special attention for elderly and disabled dogs",
         "Socialization and behavioral support",
       ],
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/volunteer-team-LjmuH7Ft7TPGaNkTgto8dw.webp",
+      image: shelterImage,
     },
     {
       title: "Vaccination & Sterilization",
@@ -48,7 +53,7 @@ export default function OurWork() {
         "Disease prevention initiatives",
         "Population control to reduce street suffering",
       ],
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/impact-medical-care-o65XCUxGgKZpUudpPr4dQB.webp",
+      image: vaccinationImage,
     },
     {
       title: "Daily Feeding Program",
@@ -60,7 +65,7 @@ export default function OurWork() {
         "Nutritionally balanced meals",
         "Community engagement in feeding rounds",
       ],
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663706632196/DkHDdAnMY683ZkQqSoBkTQ/feeding-program-oTB5vXxhTZkF7YgTroS.webp",
+      image: feedingImage,
     },
   ];
 
