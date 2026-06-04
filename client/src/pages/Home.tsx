@@ -256,29 +256,27 @@ export default function Home() {
       {/* Journey Timeline */}
       <section className="py-14 md:py-20" style={{ backgroundColor: '#FBF7EE' }}>
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-emerald-900">Our Journey</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4" style={{ color: '#013835' }}>Our Journey</h2>
           <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto text-base md:text-lg">
             Moments that shaped our mission — milestones of compassion, resilience, and growth.
           </p>
 
           {/* Desktop timeline */}
           <div className="hidden md:block relative">
-            <div className="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 h-0.5 bg-emerald-200 rounded-full" />
+            <div className="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 h-0.5 rounded-full" style={{ backgroundColor: '#013835', opacity: 0.2 }} />
             <div className="grid grid-cols-4 gap-6">
               {journey.map((item, idx) => {
                 const isUp = idx % 2 === 0;
                 return (
                   <div key={item.year} className="flex flex-col items-center relative">
-                    {/* Card above/below line */}
                     <div className={`w-full ${isUp ? 'mb-8' : 'mt-8 order-last'}`}>
-                      <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-emerald-100 text-center">
-                        <div className="text-emerald-900 font-bold text-xl mb-2">{item.year}</div>
+                      <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow text-center" style={{ border: '1px solid rgba(1,56,53,0.15)' }}>
+                        <div className="font-bold text-xl mb-2" style={{ color: '#013835' }}>{item.year}</div>
                         <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
                         <p className="text-foreground/60 text-sm leading-relaxed">{item.description}</p>
                       </div>
                     </div>
-                    {/* Node on line */}
-                    <div className="relative z-10 w-5 h-5 bg-emerald-900 rounded-full shadow-md border-2 border-white flex-shrink-0" />
+                    <div className="relative z-10 w-5 h-5 rounded-full shadow-md border-2 border-white flex-shrink-0" style={{ backgroundColor: '#013835' }} />
                   </div>
                 );
               })}
@@ -287,12 +285,12 @@ export default function Home() {
 
           {/* Mobile timeline */}
           <div className="md:hidden flex flex-col gap-6 relative">
-            <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-emerald-200" />
+            <div className="absolute left-5 top-0 bottom-0 w-0.5" style={{ backgroundColor: '#013835', opacity: 0.2 }} />
             {journey.map((item, idx) => (
               <div key={item.year} className="flex items-start gap-5 pl-2">
-                <div className="relative z-10 w-5 h-5 bg-emerald-900 rounded-full shadow-md border-2 border-white flex-shrink-0 mt-1" />
-                <div className="bg-white rounded-xl p-5 shadow-sm border border-emerald-100 flex-1">
-                  <div className="text-emerald-900 font-bold text-lg mb-1">{item.year}</div>
+                <div className="relative z-10 w-5 h-5 rounded-full shadow-md border-2 border-white flex-shrink-0 mt-1" style={{ backgroundColor: '#013835' }} />
+                <div className="bg-white rounded-xl p-5 shadow-sm flex-1" style={{ border: '1px solid rgba(1,56,53,0.15)' }}>
+                  <div className="font-bold text-lg mb-1" style={{ color: '#013835' }}>{item.year}</div>
                   <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
                   <p className="text-foreground/60 text-sm leading-relaxed">{item.description}</p>
                 </div>

@@ -44,13 +44,13 @@
 
 :root {
   /* Aishi For Furries Brand Colors */
-  --primary: #184833;
-  --primary-foreground: #F7EFE6;
+  --primary: #013835;
+  --primary-foreground: #F1E7DC;
   --accent: #B99572;
   --accent-foreground: #1E2E28;
-  --sidebar-primary: #184833;
-  --sidebar-primary-foreground: #F7EFE6;
-  --chart-1: #184833;
+  --sidebar-primary: #013835;
+  --sidebar-primary-foreground: #F1E7DC;
+  --chart-1: #013835;
   --chart-2: #B99572;
   --chart-3: #7A6A56;
   --chart-4: #D4B89F;
@@ -72,20 +72,20 @@
   --border: #D7C9B7;
   --card-border: rgba(255,255,255,0.08);
   --input: #FFFFFF;
-  --ring: #184833;
+  --ring: #013835;
   --sidebar: #F7EFE6;
   --sidebar-foreground: #1E2E28;
   --sidebar-accent: #E2CABB;
   --sidebar-accent-foreground: #1E2E28;
   --sidebar-border: #D7C9B7;
-  --sidebar-ring: #184833;
+  --sidebar-ring: #013835;
 }
 
 .dark {
-  --primary: #184833;
-  --primary-foreground: #F7EFE6;
-  --sidebar-primary: #184833;
-  --sidebar-primary-foreground: #F7EFE6;
+  --primary: #013835;
+  --primary-foreground: #F1E7DC;
+  --sidebar-primary: #013835;
+  --sidebar-primary-foreground: #F1E7DC;
   --background: #1E2E28;
   --foreground: #F7EFE6;
   --card: #28342F;
