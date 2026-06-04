@@ -3,9 +3,6 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
-const BRAND_GREEN = "#013835";
-const CREAM = "#F1E7DC";
-
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Our Work", href: "/our-work" },
@@ -29,56 +26,32 @@ export default function Navigation() {
   useEffect(() => { setIsOpen(false); }, [location]);
 
   return (
-    <nav
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        backgroundColor: scrolled ? "rgba(1,56,53,0.97)" : BRAND_GREEN,
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: `1px solid rgba(241,231,220,0.10)`,
-        transition: "all 0.3s ease",
-      }}
-    >
-      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-lg" : ""}`}
+      style={{ backgroundColor: "#013835", borderBottom: "1px solid rgba(241,231,220,0.10)" }}>
+      <div className="container flex items-center justify-between h-16 md:h-[68px]">
 
         {/* Logo */}
         <Link href="/">
-          <a style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-            <img src={logo} alt="Aishi For Furries" style={{ height: 40, width: 40, objectFit: "contain", borderRadius: "50%" }} />
-            <span style={{
-              fontFamily: "'DM Serif Display', Georgia, serif",
-              fontSize: "1.15rem",
-              fontWeight: 400,
-              color: CREAM,
-              letterSpacing: "0.01em",
-              lineHeight: 1.2,
-            }}>
+          <a className="flex items-center gap-2 md:gap-3 no-underline flex-shrink-0">
+            <img src={logo} alt="Aishi For Furries" className="h-9 w-9 md:h-10 md:w-10 object-contain rounded-full" />
+            <span className="text-base md:text-lg font-semibold" style={{ color: "#F1E7DC", fontFamily: "'DM Serif Display', Georgia, serif", fontWeight: 400 }}>
               Aishi For Furries
             </span>
           </a>
         </Link>
 
-        {/* Desktop nav */}
-        <div style={{ display: "flex", alignItems: "center", gap: "4px" }} className="hidden md:flex">
+        {/* Desktop nav links */}
+        <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
             const active = location === item.href;
             return (
               <Link key={item.href} href={item.href}>
-                <a style={{
-                  padding: "6px 14px",
-                  fontSize: "0.875rem",
-                  fontWeight: active ? 500 : 400,
-                  color: active ? CREAM : "rgba(241,231,220,0.75)",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  letterSpacing: "0.01em",
-                  backgroundColor: active ? "rgba(241,231,220,0.12)" : "transparent",
-                  transition: "all 0.15s ease",
-                }}
-                  onMouseEnter={e => { if (!active) (e.target as HTMLElement).style.color = CREAM; (e.target as HTMLElement).style.backgroundColor = "rgba(241,231,220,0.08)"; }}
-                  onMouseLeave={e => { if (!active) (e.target as HTMLElement).style.color = "rgba(241,231,220,0.75)"; (e.target as HTMLElement).style.backgroundColor = "transparent"; }}
-                >
+                <a className="px-3 py-2 text-sm rounded-md transition-all duration-150 no-underline"
+                  style={{
+                    color: active ? "#F1E7DC" : "rgba(241,231,220,0.72)",
+                    backgroundColor: active ? "rgba(241,231,220,0.12)" : "transparent",
+                    fontWeight: active ? 500 : 400,
+                  }}>
                   {item.label}
                 </a>
               </Link>
@@ -86,27 +59,11 @@ export default function Navigation() {
           })}
         </div>
 
-        {/* Donate CTA */}
-        <div className="hidden md:flex">
+        {/* Desktop Donate CTA */}
+        <div className="hidden md:flex items-center">
           <Link href="/donate">
-            <a style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              padding: "9px 22px",
-              backgroundColor: CREAM,
-              color: BRAND_GREEN,
-              borderRadius: "8px",
-              fontWeight: 600,
-              fontSize: "0.875rem",
-              textDecoration: "none",
-              letterSpacing: "0.02em",
-              transition: "all 0.18s ease",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
-            }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "#fff"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = CREAM; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
-            >
+            <a className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg text-sm font-semibold no-underline transition-all duration-200 hover:brightness-110"
+              style={{ backgroundColor: "#F1E7DC", color: "#013835" }}>
               💛 Donate Now
             </a>
           </Link>
@@ -115,8 +72,8 @@ export default function Navigation() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden"
-          style={{ padding: "8px", color: CREAM, background: "none", border: "none" }}
+          className="md:hidden p-2 rounded-md"
+          style={{ color: "#F1E7DC", background: "none", border: "none" }}
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -125,38 +82,21 @@ export default function Navigation() {
 
       {/* Mobile drawer */}
       {isOpen && (
-        <div style={{
-          backgroundColor: BRAND_GREEN,
-          borderTop: "1px solid rgba(241,231,220,0.12)",
-          padding: "16px 0 24px",
-        }}>
-          <div className="container" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+        <div style={{ backgroundColor: "#013835", borderTop: "1px solid rgba(241,231,220,0.12)" }}>
+          <div className="container py-4 flex flex-col gap-1">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <a style={{
-                  display: "block",
-                  padding: "10px 14px",
-                  color: "rgba(241,231,220,0.9)",
-                  textDecoration: "none",
-                  fontSize: "1rem",
-                  borderRadius: "6px",
-                }}>
+                <a className="block px-4 py-3 rounded-md text-base no-underline"
+                  style={{ color: "rgba(241,231,220,0.85)" }}
+                  onClick={() => setIsOpen(false)}>
                   {item.label}
                 </a>
               </Link>
             ))}
             <Link href="/donate">
-              <a style={{
-                display: "block",
-                marginTop: "12px",
-                padding: "12px 14px",
-                backgroundColor: CREAM,
-                color: BRAND_GREEN,
-                fontWeight: 600,
-                textDecoration: "none",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}>
+              <a className="block mt-3 px-4 py-3 rounded-lg text-base font-semibold text-center no-underline"
+                style={{ backgroundColor: "#F1E7DC", color: "#013835" }}
+                onClick={() => setIsOpen(false)}>
                 💛 Donate Now
               </a>
             </Link>
