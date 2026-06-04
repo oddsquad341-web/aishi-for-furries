@@ -1,20 +1,61 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Heart, Users, Stethoscope, Utensils, Scissors } from "lucide-react";
+import { Heart, Users, Stethoscope, Utensils, Scissors, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import heroImage from "@/assets/aishi/raw/2.png";
 import founderImage from "@/assets/aishi/raw/0.png";
 import lakshmiImage from "@/assets/aishi/raw/6.jpg";
 import narayanImage from "@/assets/aishi/raw/7.jpg";
 import blackyImage from "@/assets/aishi/raw/9.png";
 
+const G = "#013835";
+const CREAM = "#F1E7DC";
+const GOLD = "#B99572";
+
+// ── Scroll-reveal hook ──────────────────────────────────────────
+function useReveal(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, visible };
+}
+
+// ── Animated counter ────────────────────────────────────────────
+function AnimatedNumber({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const { ref, visible } = useReveal(0.3);
+  useEffect(() => {
+    if (!visible) return;
+    let start = 0;
+    const duration = 1800;
+    const step = 16;
+    const increment = target / (duration / step);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= target) { setCount(target); clearInterval(timer); }
+      else setCount(Math.floor(start));
+    }, step);
+    return () => clearInterval(timer);
+  }, [visible, target]);
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
 export default function Home() {
   const stats = [
-    { number: "65+", label: "Permanent Rescues", icon: Heart },
-    { number: "500+", label: "Medical Cases", icon: Stethoscope },
-    { number: "150+", label: "Dogs Fed Daily", icon: Utensils },
-    { number: "40+", label: "Adoptions", icon: Users },
-    { number: "1500+", label: "Sterilisations", icon: Scissors },
+    { number: 65, suffix: "+", label: "Permanent Rescues", icon: Heart },
+    { number: 500, suffix: "+", label: "Medical Cases", icon: Stethoscope },
+    { number: 150, suffix: "+", label: "Dogs Fed Daily", icon: Utensils },
+    { number: 40, suffix: "+", label: "Adoptions", icon: Users },
+    { number: 1500, suffix: "+", label: "Sterilisations", icon: Scissors },
   ];
 
   const pillars = [
@@ -26,134 +67,234 @@ export default function Home() {
   ];
 
   const journey = [
-    {
-      year: "2017",
-      title: "Aashima's Journey Begins",
-      description: "Two community dogs sparked a mission that would eventually transform hundreds of lives.",
-    },
-    {
-      year: "2020",
-      title: "COVID Response",
-      description: "While the world shut down, rescue and feeding efforts intensified.",
-    },
-    {
-      year: "2024",
-      title: "Permanent Shelter",
-      description: "A dedicated sanctuary opened for senior, injured, and paralysed animals.",
-    },
-    {
-      year: "2025",
-      title: "Registered NGO",
-      description: "Aishi For Furries became a registered organisation, expanding impact and long-term care.",
-    },
+    { year: "2017", title: "It Begins", description: "Two community dogs spark a lifelong mission." },
+    { year: "2020", title: "COVID Response", description: "Rescues intensified while the world shut down." },
+    { year: "2024", title: "Permanent Shelter", description: "A sanctuary for senior and paralysed animals." },
+    { year: "2025", title: "Registered NGO", description: "Formal recognition, expanded reach and impact." },
   ];
 
   const stories = [
-    {
-      image: lakshmiImage,
-      name: "Lakshmi",
-      description: "Spinal injury survivor now living with dignity.",
-      slug: "lakshmi",
-    },
-    {
-      image: narayanImage,
-      name: "Narayan",
-      description: "Hit-and-run survivor rehabilitated to freedom.",
-      slug: "narayan",
-    },
-    {
-      image: blackyImage,
-      name: "Blacky",
-      description: "A brave story of recovery and care.",
-      slug: "blacky",
-    },
+    { image: lakshmiImage, name: "Lakshmi", description: "Spinal injury survivor now living with dignity.", slug: "lakshmi" },
+    { image: narayanImage, name: "Narayan", description: "Hit-and-run survivor rehabilitated to freedom.", slug: "narayan" },
+    { image: blackyImage, name: "Blacky", description: "A brave story of recovery and care.", slug: "blacky" },
   ];
 
-  return (
-    <div className="min-h-screen">
+  // Hero text reveal
+  const [heroVisible, setHeroVisible] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setHeroVisible(true), 100); return () => clearTimeout(t); }, []);
 
-      {/* Hero Banner */}
-      <section className="relative h-[500px] md:h-[620px] overflow-hidden">
-        <img
-          src={heroImage}
-          alt="A rescued dog in our care"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/45"></div>
-        <div className="relative h-full container flex flex-col justify-center items-start">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight">
-              Every Dog Deserves a Second Chance
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-              Rescuing, rehabilitating, and caring for Gurgaon's most vulnerable dogs — from emergency rescues to lifelong shelter residents.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/donate">
-                <a>
-                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold">
-                    💛 Donate Now
-                  </Button>
-                </a>
-              </Link>
-              <Link href="/adopt">
-                <a>
-                  <Button variant="outline" className="border-white text-white hover:bg-white/20 px-8 py-6 text-lg font-semibold">
-                    🐾 Meet Our Dogs
-                  </Button>
-                </a>
-              </Link>
-            </div>
+  // Parallax hero
+  const heroRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onScroll = () => {
+      if (heroRef.current) {
+        const img = heroRef.current.querySelector("img") as HTMLElement;
+        if (img) img.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Section reveals
+  const statsReveal = useReveal(0.1);
+  const storiesReveal = useReveal(0.1);
+  const pillarsReveal = useReveal(0.1);
+  const founderReveal = useReveal(0.1);
+  const timelineReveal = useReveal(0.1);
+
+  const staggerStyle = (i: number, visible: boolean) => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(40px)",
+    transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s`,
+  });
+
+  return (
+    <div style={{ overflowX: "hidden" }}>
+
+      {/* ── HERO ─────────────────────────────────────────── */}
+      <section ref={heroRef} style={{ position: "relative", height: "100svh", minHeight: 520, maxHeight: 800, overflow: "hidden" }}>
+        <img src={heroImage} alt="Rescued dog" style={{
+          position: "absolute", inset: 0, width: "100%", height: "115%",
+          objectFit: "cover", objectPosition: "center",
+          willChange: "transform",
+        }} />
+        {/* layered gradient */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(1,56,53,0.75) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%)" }} />
+        {/* decorative gold line */}
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: `linear-gradient(to bottom, transparent, ${GOLD}, transparent)` }} />
+
+        <div className="container" style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: "80px" }}>
+          {/* eyebrow */}
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "rgba(241,231,220,0.12)", border: `1px solid rgba(241,231,220,0.25)`,
+            borderRadius: 999, padding: "6px 16px", marginBottom: 24,
+            width: "fit-content",
+            opacity: heroVisible ? 1 : 0, transform: heroVisible ? "none" : "translateY(12px)",
+            transition: "all 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s",
+          }}>
+            <span style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: GOLD, display: "inline-block" }} />
+            <span style={{ color: CREAM, fontSize: "0.78rem", fontFamily: "'Josefin Sans', sans-serif", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              Animal Welfare · Gurgaon
+            </span>
+          </div>
+
+          <h1 style={{
+            color: "#FFFFFF", maxWidth: 680, marginBottom: 24,
+            fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700,
+            fontSize: "clamp(2.2rem, 5.5vw, 4rem)", lineHeight: 1.1, letterSpacing: "-0.01em",
+            opacity: heroVisible ? 1 : 0, transform: heroVisible ? "none" : "translateY(20px)",
+            transition: "all 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s",
+          }}>
+            Every Dog Deserves<br />
+            <span style={{ color: GOLD }}>a Second Chance</span>
+          </h1>
+
+          <p style={{
+            color: "rgba(255,255,255,0.85)", maxWidth: 520, marginBottom: 36,
+            fontFamily: "'Quicksand', sans-serif", fontSize: "1.1rem", lineHeight: 1.75,
+            opacity: heroVisible ? 1 : 0, transform: heroVisible ? "none" : "translateY(20px)",
+            transition: "all 0.8s cubic-bezier(0.22,1,0.36,1) 0.35s",
+          }}>
+            Rescuing, rehabilitating, and caring for Gurgaon's most vulnerable dogs — from emergency rescues to lifelong shelter residents.
+          </p>
+
+          <div style={{
+            display: "flex", flexWrap: "wrap", gap: 12,
+            opacity: heroVisible ? 1 : 0, transform: heroVisible ? "none" : "translateY(20px)",
+            transition: "all 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s",
+          }}>
+            <Link href="/donate">
+              <a style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: GOLD, color: G,
+                padding: "14px 28px", borderRadius: 10,
+                fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700,
+                fontSize: "0.95rem", letterSpacing: "0.04em", textDecoration: "none",
+                transition: "all 0.2s", boxShadow: "0 4px 20px rgba(185,149,114,0.4)",
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 28px rgba(185,149,114,0.5)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(185,149,114,0.4)"; }}
+              >
+                💛 Donate Now
+              </a>
+            </Link>
+            <Link href="/adopt">
+              <a style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "rgba(255,255,255,0.12)", color: "#fff",
+                border: "1.5px solid rgba(255,255,255,0.4)",
+                padding: "14px 28px", borderRadius: 10,
+                fontFamily: "'Josefin Sans', sans-serif", fontWeight: 600,
+                fontSize: "0.95rem", letterSpacing: "0.04em", textDecoration: "none",
+                backdropFilter: "blur(8px)",
+                transition: "all 0.2s",
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.2)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.12)"; }}
+              >
+                🐾 Meet Our Dogs
+              </a>
+            </Link>
+          </div>
+
+          {/* scroll hint */}
+          <div style={{
+            position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)",
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+            opacity: heroVisible ? 0.6 : 0, transition: "opacity 1s 1.2s",
+          }}>
+            <span style={{ color: CREAM, fontSize: "0.7rem", fontFamily: "'Josefin Sans', sans-serif", letterSpacing: "0.15em", textTransform: "uppercase" }}>Scroll</span>
+            <div style={{ width: 1, height: 40, background: `linear-gradient(to bottom, ${CREAM}, transparent)`, animation: "scrollPulse 2s ease-in-out infinite" }} />
           </div>
         </div>
       </section>
 
-      {/* Impact Numbers */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Impact in Numbers</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {stats.map((stat, idx) => {
+      {/* ── STATS ────────────────────────────────────────── */}
+      <section style={{ background: G, padding: "64px 0" }}>
+        <div className="container" ref={statsReveal.ref}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "2px" }}>
+            {stats.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <Card key={idx} className="p-6 text-center hover:shadow-lg transition-shadow">
-                  <Icon className="w-10 h-10 mx-auto mb-3 text-primary" />
-                  <div className="text-3xl font-bold mb-1 text-foreground">{stat.number}</div>
-                  <p className="text-sm font-medium text-foreground/70">{stat.label}</p>
-                </Card>
+                <div key={i} style={{
+                  textAlign: "center", padding: "32px 16px",
+                  borderRight: i < stats.length - 1 ? "1px solid rgba(241,231,220,0.12)" : "none",
+                  ...staggerStyle(i, statsReveal.visible),
+                }}>
+                  <Icon style={{ width: 28, height: 28, color: GOLD, margin: "0 auto 12px" }} />
+                  <div style={{ fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, fontSize: "clamp(1.8rem, 3vw, 2.5rem)", color: CREAM, lineHeight: 1 }}>
+                    <AnimatedNumber target={stat.number} suffix={stat.suffix} />
+                  </div>
+                  <div style={{ color: "rgba(241,231,220,0.6)", fontSize: "0.8rem", fontFamily: "'Josefin Sans', sans-serif", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 8 }}>
+                    {stat.label}
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Stories of Hope */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold">Stories of Hope</h2>
+      {/* ── STORIES OF HOPE ──────────────────────────────── */}
+      <section style={{ background: "#FAF6F0", padding: "96px 0" }}>
+        <div className="container" ref={storiesReveal.ref}>
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 56, flexWrap: "wrap", gap: 16 }}>
+            <div>
+              <p style={{ color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 10 }}>Real Lives. Real Change.</p>
+              <h2 style={{ fontFamily: "'Josefin Sans', sans-serif", color: G, margin: 0 }}>Stories of Hope</h2>
+            </div>
             <Link href="/rescue-stories">
-              <a className="text-primary font-medium hover:underline">View all →</a>
+              <a style={{ display: "flex", alignItems: "center", gap: 6, color: G, fontFamily: "'Josefin Sans', sans-serif", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", letterSpacing: "0.05em" }}>
+                View all <ArrowRight size={15} />
+              </a>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stories.map((story, idx) => (
-              <Link key={idx} href={`/rescue-stories/${story.slug}`}>
-                <a className="group block">
-                  <Card className="overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1 p-0">
-                    <div className="overflow-hidden h-52 rounded-t-xl">
-                      <img
-                        src={story.image}
-                        alt={story.name}
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                      />
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+            {stories.map((story, i) => (
+              <Link key={i} href={`/rescue-stories/${story.slug}`}>
+                <a style={{ textDecoration: "none", display: "block" }}>
+                  <div style={{
+                    ...staggerStyle(i, storiesReveal.visible),
+                    background: G, borderRadius: 16, overflow: "hidden",
+                    cursor: "pointer", position: "relative",
+                    boxShadow: "0 4px 24px rgba(1,56,53,0.12)",
+                  }}
+                    className="story-card"
+                    onMouseEnter={e => {
+                      const img = (e.currentTarget as HTMLElement).querySelector(".story-img") as HTMLElement;
+                      if (img) { img.style.transform = "scale(1.08) translateY(-4px)"; }
+                      (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "0 20px 48px rgba(1,56,53,0.22)";
+                    }}
+                    onMouseLeave={e => {
+                      const img = (e.currentTarget as HTMLElement).querySelector(".story-img") as HTMLElement;
+                      if (img) { img.style.transform = "scale(1) translateY(0)"; }
+                      (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 24px rgba(1,56,53,0.12)";
+                    }}
+                    style={{ transition: "all 0.35s cubic-bezier(0.22,1,0.36,1)", ...staggerStyle(i, storiesReveal.visible) }}
+                  >
+                    {/* image pops out effect via clip + scale */}
+                    <div style={{ height: 220, overflow: "hidden", position: "relative" }}>
+                      <img src={story.image} alt={story.name} className="story-img" style={{
+                        width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top",
+                        transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)",
+                        display: "block",
+                      }} />
+                      {/* gradient fade into card */}
+                      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 80, background: `linear-gradient(to top, ${G}, transparent)` }} />
                     </div>
-                    <div className="p-5">
-                      <h3 className="text-lg font-bold mb-1">{story.name}</h3>
-                      <p className="text-sm mb-3" style={{ color: 'var(--card-foreground)', opacity: 0.75 }}>{story.description}</p>
-                      <span className="text-sm font-medium" style={{ color: 'var(--card-foreground)' }}>Read story →</span>
+                    <div style={{ padding: "20px 24px 28px" }}>
+                      <h3 style={{ fontFamily: "'Josefin Sans', sans-serif", color: CREAM, marginBottom: 8, fontSize: "1.3rem" }}>{story.name}</h3>
+                      <p style={{ color: "rgba(241,231,220,0.72)", fontSize: "0.9rem", marginBottom: 16, lineHeight: 1.6 }}>{story.description}</p>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                        Read story <ArrowRight size={13} />
+                      </span>
                     </div>
-                  </Card>
+                  </div>
                 </a>
               </Link>
             ))}
@@ -161,138 +302,131 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Donation Banner */}
-      <section className="py-14 md:py-20 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-5 uppercase tracking-wide">
-            Give Them a Second Chance
-          </h2>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
-            Every rescue deserves food, medical care, and a safe place to heal. Your donation helps us care for abandoned, injured, senior, and special-needs dogs while they wait for the homes they deserve.
+      {/* ── DONATION BANNER ──────────────────────────────── */}
+      <section style={{ background: `linear-gradient(135deg, #012825 0%, ${G} 60%, #025950 100%)`, padding: "96px 0", position: "relative", overflow: "hidden" }}>
+        {/* decorative circles */}
+        <div style={{ position: "absolute", right: -100, top: -100, width: 400, height: 400, borderRadius: "50%", border: `1px solid rgba(241,231,220,0.06)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", right: -40, top: -40, width: 250, height: 250, borderRadius: "50%", border: `1px solid rgba(241,231,220,0.08)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", left: -80, bottom: -80, width: 300, height: 300, borderRadius: "50%", border: `1px solid rgba(185,149,114,0.08)`, pointerEvents: "none" }} />
+
+        <div className="container" style={{ textAlign: "center", position: "relative" }}>
+          <p style={{ color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 16 }}>Make a Difference Today</p>
+          <h2 style={{ color: CREAM, fontFamily: "'Josefin Sans', sans-serif", fontSize: "clamp(1.8rem, 4vw, 3rem)", maxWidth: 640, margin: "0 auto 24px" }}>Give Them a Second Chance</h2>
+          <p style={{ color: "rgba(241,231,220,0.75)", fontFamily: "'Quicksand', sans-serif", fontSize: "1.05rem", maxWidth: 540, margin: "0 auto 40px", lineHeight: 1.8 }}>
+            Every rescue deserves food, medical care, and a safe place to heal. Your donation helps us care for abandoned, injured, senior, and special-needs dogs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
             <Link href="/donate">
-              <a>
-                <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-8 py-6 text-lg font-semibold">
-                  💛 Donate Now
-                </Button>
+              <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: GOLD, color: G, padding: "15px 32px", borderRadius: 10, fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", letterSpacing: "0.04em", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 20px rgba(185,149,114,0.3)" }}>
+                💛 Donate Now
               </a>
             </Link>
             <Link href="/adopt">
-              <a>
-                <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg font-semibold">
-                  🐾 Adopt a Dog
-                </Button>
+              <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: CREAM, border: `1.5px solid rgba(241,231,220,0.35)`, padding: "15px 32px", borderRadius: 10, fontFamily: "'Josefin Sans', sans-serif", fontWeight: 600, fontSize: "0.95rem", letterSpacing: "0.04em", textDecoration: "none", transition: "all 0.2s" }}>
+                🐾 Adopt a Dog
               </a>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Our Five Pillars */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Our Five Pillars</h2>
-          <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto text-base md:text-lg">
-            Comprehensive care across rescue, medical support, shelter, prevention, and community feeding.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            {pillars.slice(0, 3).map((pillar, idx) => (
-              <Card key={idx} className="p-6 hover:shadow-lg transition-shadow border-2">
-                <h3 className="text-xl font-bold mb-2 flex items-center text-foreground">
-                  <span className="text-2xl mr-3">{pillar.icon}</span>
-                  {pillar.title}
-                </h3>
-                <p className="text-foreground/70">{pillar.description}</p>
-              </Card>
+      {/* ── FIVE PILLARS ─────────────────────────────────── */}
+      <section style={{ background: "#FAF6F0", padding: "96px 0" }}>
+        <div className="container" ref={pillarsReveal.ref}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 10 }}>How We Help</p>
+            <h2 style={{ fontFamily: "'Josefin Sans', sans-serif", color: G }}>Our Five Pillars</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 20 }}>
+            {pillars.map((p, i) => (
+              <div key={i} style={{
+                ...staggerStyle(i, pillarsReveal.visible),
+                background: G, borderRadius: 16, padding: "32px 24px",
+                border: "1px solid rgba(241,231,220,0.10)",
+                transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s, box-shadow 0.25s`,
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 40px rgba(1,56,53,0.25)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; if (pillarsReveal.visible) (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+              >
+                <div style={{ fontSize: "2rem", marginBottom: 16 }}>{p.icon}</div>
+                <h3 style={{ fontFamily: "'Josefin Sans', sans-serif", color: CREAM, fontSize: "1.05rem", fontWeight: 700, marginBottom: 10 }}>{p.title}</h3>
+                <p style={{ color: "rgba(241,231,220,0.68)", fontSize: "0.875rem", lineHeight: 1.7, margin: 0 }}>{p.description}</p>
+              </div>
             ))}
           </div>
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
-              {pillars.slice(3).map((pillar, idx) => (
-                <Card key={idx} className="p-6 hover:shadow-lg transition-shadow border-2">
-                  <h3 className="text-xl font-bold mb-2 flex items-center text-foreground">
-                    <span className="text-2xl mr-3">{pillar.icon}</span>
-                    {pillar.title}
-                  </h3>
-                  <p className="text-foreground/70">{pillar.description}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Meet Aashima Madan */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet Aashima Madan</h2>
-              <p className="text-foreground/80 mb-4 leading-relaxed text-base md:text-lg">
+      {/* ── MEET AASHIMA ─────────────────────────────────── */}
+      <section style={{ background: "#fff", padding: "96px 0" }}>
+        <div className="container" ref={founderReveal.ref}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 60, alignItems: "center" }}>
+            {/* Image with decorative frame */}
+            <div style={{ ...staggerStyle(0, founderReveal.visible), position: "relative" }}>
+              <div style={{ position: "absolute", inset: -16, border: `2px solid ${GOLD}`, borderRadius: 20, opacity: 0.25, zIndex: 0 }} />
+              <div style={{ position: "absolute", top: -8, right: -8, width: 80, height: 80, background: GOLD, borderRadius: "0 20px 0 80px", opacity: 0.15, zIndex: 0 }} />
+              <img src={founderImage} alt="Aashima Madan" style={{ width: "100%", aspectRatio: "4/5", objectFit: "cover", borderRadius: 16, position: "relative", zIndex: 1, display: "block" }} />
+            </div>
+            <div style={staggerStyle(1, founderReveal.visible)}>
+              <p style={{ color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>The Person Behind the Mission</p>
+              <h2 style={{ fontFamily: "'Josefin Sans', sans-serif", color: G, marginBottom: 24 }}>Meet Aashima Madan</h2>
+              <p style={{ color: "#3a3a3a", lineHeight: 1.85, marginBottom: 16 }}>
                 What began with two community dogs in 2017 has grown into Aishi For Furries — a registered animal welfare organization dedicated to rescuing, rehabilitating, and caring for dogs in need.
               </p>
-              <p className="text-foreground/80 mb-4 leading-relaxed text-base md:text-lg">
-                For Aashima, the mission has always been simple: every animal deserves kindness, medical care, safety, and the opportunity to live with dignity. What started as a personal commitment soon became a lifelong purpose, driven by countless rescues, recoveries, and second chances.
+              <p style={{ color: "#3a3a3a", lineHeight: 1.85, marginBottom: 16 }}>
+                For Aashima, the mission has always been simple: every animal deserves kindness, medical care, safety, and the opportunity to live with dignity.
               </p>
-              <p className="text-foreground/80 mb-4 leading-relaxed text-base md:text-lg">
+              <p style={{ color: "#3a3a3a", lineHeight: 1.85, marginBottom: 32 }}>
                 Today, Aishi For Furries cares for over 100 community dogs, houses 45+ permanent residents, and continues to provide medical support, shelter, and rehabilitation to vulnerable animals across Gurgaon.
               </p>
-              <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-                At its heart, the organization remains rooted in the same belief it began with — that every life matters, and every dog deserves a place where they can heal, belong, and be loved.
-              </p>
-            </div>
-            <div className="relative h-96 rounded-xl overflow-hidden shadow-lg">
-              <img
-                src={founderImage}
-                alt="Aashima Madan caring for rescued dogs"
-                className="w-full h-full object-cover"
-              />
+              <Link href="/about">
+                <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: G, color: CREAM, padding: "13px 28px", borderRadius: 10, fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, fontSize: "0.875rem", letterSpacing: "0.05em", textDecoration: "none" }}>
+                  Our Story <ArrowRight size={15} />
+                </a>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Journey Timeline */}
-      <section className="py-14 md:py-20" style={{ backgroundColor: '#FBF7EE' }}>
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4" style={{ color: '#013835' }}>Our Journey</h2>
-          <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto text-base md:text-lg">
-            Moments that shaped our mission — milestones of compassion, resilience, and growth.
-          </p>
-
-          {/* Desktop timeline */}
-          <div className="hidden md:block relative">
-            <div className="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 h-0.5 rounded-full" style={{ backgroundColor: '#013835', opacity: 0.2 }} />
-            <div className="grid grid-cols-4 gap-6">
-              {journey.map((item, idx) => {
-                const isUp = idx % 2 === 0;
+      {/* ── JOURNEY TIMELINE ─────────────────────────────── */}
+      <section style={{ background: G, padding: "96px 0" }}>
+        <div className="container" ref={timelineReveal.ref}>
+          <div style={{ textAlign: "center", marginBottom: 64 }}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 10 }}>Since 2017</p>
+            <h2 style={{ fontFamily: "'Josefin Sans', sans-serif", color: CREAM }}>Our Journey</h2>
+          </div>
+          {/* Desktop */}
+          <div className="hidden md:block" style={{ position: "relative" }}>
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 1, background: `linear-gradient(to right, transparent, rgba(241,231,220,0.2), transparent)`, transform: "translateY(-50%)" }} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+              {journey.map((item, i) => {
+                const isUp = i % 2 === 0;
                 return (
-                  <div key={item.year} className="flex flex-col items-center relative">
-                    <div className={`w-full ${isUp ? 'mb-8' : 'mt-8 order-last'}`}>
-                      <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow text-center" style={{ border: '1px solid rgba(1,56,53,0.15)' }}>
-                        <div className="font-bold text-xl mb-2" style={{ color: '#013835' }}>{item.year}</div>
-                        <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
-                        <p className="text-foreground/60 text-sm leading-relaxed">{item.description}</p>
+                  <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", ...staggerStyle(i, timelineReveal.visible) }}>
+                    <div style={{ width: "100%", ...(isUp ? { marginBottom: 32 } : { marginTop: 32, order: 2 }) }}>
+                      <div style={{ background: "rgba(241,231,220,0.07)", border: "1px solid rgba(241,231,220,0.12)", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
+                        <div style={{ fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, fontSize: "1.5rem", color: GOLD, marginBottom: 8 }}>{item.year}</div>
+                        <div style={{ fontFamily: "'Josefin Sans', sans-serif", fontWeight: 600, color: CREAM, marginBottom: 8, fontSize: "0.95rem" }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.6)", fontSize: "0.82rem", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
                       </div>
                     </div>
-                    <div className="relative z-10 w-5 h-5 rounded-full shadow-md border-2 border-white flex-shrink-0" style={{ backgroundColor: '#013835' }} />
+                    <div style={{ width: 14, height: 14, borderRadius: "50%", background: GOLD, border: "3px solid rgba(241,231,220,0.3)", flexShrink: 0, position: "relative", zIndex: 1 }} />
                   </div>
                 );
               })}
             </div>
           </div>
-
-          {/* Mobile timeline */}
-          <div className="md:hidden flex flex-col gap-6 relative">
-            <div className="absolute left-5 top-0 bottom-0 w-0.5" style={{ backgroundColor: '#013835', opacity: 0.2 }} />
-            {journey.map((item, idx) => (
-              <div key={item.year} className="flex items-start gap-5 pl-2">
-                <div className="relative z-10 w-5 h-5 rounded-full shadow-md border-2 border-white flex-shrink-0 mt-1" style={{ backgroundColor: '#013835' }} />
-                <div className="bg-white rounded-xl p-5 shadow-sm flex-1" style={{ border: '1px solid rgba(1,56,53,0.15)' }}>
-                  <div className="font-bold text-lg mb-1" style={{ color: '#013835' }}>{item.year}</div>
-                  <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-foreground/60 text-sm leading-relaxed">{item.description}</p>
+          {/* Mobile */}
+          <div className="md:hidden" style={{ position: "relative", paddingLeft: 24 }}>
+            <div style={{ position: "absolute", left: 6, top: 0, bottom: 0, width: 1, background: "rgba(241,231,220,0.15)" }} />
+            {journey.map((item, i) => (
+              <div key={i} style={{ display: "flex", gap: 20, marginBottom: 28, ...staggerStyle(i, timelineReveal.visible) }}>
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: GOLD, flexShrink: 0, marginTop: 6, position: "relative", left: -30 }} />
+                <div style={{ background: "rgba(241,231,220,0.07)", border: "1px solid rgba(241,231,220,0.12)", borderRadius: 12, padding: "18px 16px", flex: 1, marginLeft: -14 }}>
+                  <div style={{ fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, color: GOLD, marginBottom: 4 }}>{item.year}</div>
+                  <div style={{ fontFamily: "'Josefin Sans', sans-serif", fontWeight: 600, color: CREAM, marginBottom: 6, fontSize: "0.9rem" }}>{item.title}</div>
+                  <p style={{ color: "rgba(241,231,220,0.6)", fontSize: "0.82rem", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
                 </div>
               </div>
             ))}
@@ -300,26 +434,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA Banner */}
-      <section className="py-14 md:py-20 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Help Us Keep Showing Up</h2>
-          <div className="text-lg md:text-xl mb-8 max-w-xl mx-auto opacity-90 space-y-1 leading-relaxed">
+      {/* ── FINAL CTA ─────────────────────────────────────── */}
+      <section style={{ background: "#FAF6F0", padding: "112px 0", textAlign: "center" }}>
+        <div className="container">
+          <p style={{ color: GOLD, fontFamily: "'Josefin Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 20 }}>Every Life Matters</p>
+          <h2 style={{ fontFamily: "'Josefin Sans', sans-serif", color: G, fontSize: "clamp(2rem, 4vw, 3rem)", maxWidth: 640, margin: "0 auto 28px" }}>Help Us Keep Showing Up</h2>
+          <div style={{ color: "#555", fontFamily: "'Quicksand', sans-serif", fontSize: "1.05rem", lineHeight: 2, marginBottom: 44, maxWidth: 440, margin: "0 auto 44px" }}>
             <p>For the dog recovering from surgery.</p>
             <p>For the senior who has nowhere else to go.</p>
             <p>For the puppy waiting for a family.</p>
-            <p>For every life that still needs a second chance.</p>
+            <p style={{ fontWeight: 700, color: G }}>For every life that still needs a second chance.</p>
           </div>
           <Link href="/donate">
-            <a>
-              <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-10 py-6 text-lg font-semibold">
-                Donate Now
-              </Button>
+            <a style={{ display: "inline-flex", alignItems: "center", gap: 10, background: G, color: CREAM, padding: "16px 40px", borderRadius: 12, fontFamily: "'Josefin Sans', sans-serif", fontWeight: 700, fontSize: "1rem", letterSpacing: "0.05em", textDecoration: "none", boxShadow: "0 8px 32px rgba(1,56,53,0.2)", transition: "all 0.2s" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 48px rgba(1,56,53,0.28)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(1,56,53,0.2)"; }}
+            >
+              Donate Now <ArrowRight size={16} />
             </a>
           </Link>
         </div>
       </section>
 
+      <style>{`
+        @keyframes scrollPulse {
+          0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+          50% { opacity: 1; transform: scaleY(1); }
+        }
+      `}</style>
     </div>
   );
 }
