@@ -1,83 +1,163 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import logo from "@/assets/aishi/raw/circularlogo.png";
+
+const BRAND_GREEN = "#013835";
+const CREAM = "#F1E7DC";
+
+const navItems = [
+  { label: "About", href: "/about" },
+  { label: "Our Work", href: "/our-work" },
+  { label: "Impact", href: "/impact" },
+  { label: "Adopt & Foster", href: "/adopt" },
+  { label: "Partner With Us", href: "/volunteer" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
 
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Our Work", href: "/our-work" },
-    { label: "Impact", href: "/impact" },
-    { label: "Adopt/Foster", href: "/adopt" },
-    { label: "Volunteer", href: "/volunteer" },
-    { label: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-background border-b border-border shadow-sm">
-      <div className="container flex items-center justify-between h-16">
+    <nav
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        backgroundColor: scrolled ? "rgba(1,56,53,0.97)" : BRAND_GREEN,
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: `1px solid rgba(241,231,220,0.10)`,
+        transition: "all 0.3s ease",
+      }}
+    >
+      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
+
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-3 font-bold text-xl text-primary hover:opacity-80 transition-opacity">
-            <img src={logo} alt="Aishi For Furries" className="h-8 md:h-10 object-contain" />
-            <span>Aishi For Furries</span>
+          <a style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
+            <img src={logo} alt="Aishi For Furries" style={{ height: 40, width: 40, objectFit: "contain", borderRadius: "50%" }} />
+            <span style={{
+              fontFamily: "'DM Serif Display', Georgia, serif",
+              fontSize: "1.15rem",
+              fontWeight: 400,
+              color: CREAM,
+              letterSpacing: "0.01em",
+              lineHeight: 1.2,
+            }}>
+              Aishi For Furries
+            </span>
           </a>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
-              <a className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/20 rounded-md transition-colors">
-                {item.label}
-              </a>
-            </Link>
-          ))}
+        {/* Desktop nav */}
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }} className="hidden md:flex">
+          {navItems.map((item) => {
+            const active = location === item.href;
+            return (
+              <Link key={item.href} href={item.href}>
+                <a style={{
+                  padding: "6px 14px",
+                  fontSize: "0.875rem",
+                  fontWeight: active ? 500 : 400,
+                  color: active ? CREAM : "rgba(241,231,220,0.75)",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  letterSpacing: "0.01em",
+                  backgroundColor: active ? "rgba(241,231,220,0.12)" : "transparent",
+                  transition: "all 0.15s ease",
+                }}
+                  onMouseEnter={e => { if (!active) (e.target as HTMLElement).style.color = CREAM; (e.target as HTMLElement).style.backgroundColor = "rgba(241,231,220,0.08)"; }}
+                  onMouseLeave={e => { if (!active) (e.target as HTMLElement).style.color = "rgba(241,231,220,0.75)"; (e.target as HTMLElement).style.backgroundColor = "transparent"; }}
+                >
+                  {item.label}
+                </a>
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Donate Button */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Donate CTA */}
+        <div className="hidden md:flex">
           <Link href="/donate">
-            <a>
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                Donate Now
-              </Button>
+            <a style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "9px 22px",
+              backgroundColor: CREAM,
+              color: BRAND_GREEN,
+              borderRadius: "8px",
+              fontWeight: 600,
+              fontSize: "0.875rem",
+              textDecoration: "none",
+              letterSpacing: "0.02em",
+              transition: "all 0.18s ease",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+            }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "#fff"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = CREAM; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+            >
+              💛 Donate Now
             </a>
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 hover:bg-accent/20 rounded-md transition-colors"
+          className="md:hidden"
+          style={{ padding: "8px", color: CREAM, background: "none", border: "none" }}
+          aria-label="Toggle menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile drawer */}
       {isOpen && (
-        <div className="md:hidden border-t border-border bg-background">
-          <div className="container py-4 space-y-2">
+        <div style={{
+          backgroundColor: BRAND_GREEN,
+          borderTop: "1px solid rgba(241,231,220,0.12)",
+          padding: "16px 0 24px",
+        }}>
+          <div className="container" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <a
-                  className="block px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/20 rounded-md transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
+                <a style={{
+                  display: "block",
+                  padding: "10px 14px",
+                  color: "rgba(241,231,220,0.9)",
+                  textDecoration: "none",
+                  fontSize: "1rem",
+                  borderRadius: "6px",
+                }}>
                   {item.label}
                 </a>
               </Link>
             ))}
             <Link href="/donate">
-              <a onClick={() => setIsOpen(false)}>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Donate Now
-                </Button>
+              <a style={{
+                display: "block",
+                marginTop: "12px",
+                padding: "12px 14px",
+                backgroundColor: CREAM,
+                color: BRAND_GREEN,
+                fontWeight: 600,
+                textDecoration: "none",
+                borderRadius: "8px",
+                textAlign: "center",
+              }}>
+                💛 Donate Now
               </a>
             </Link>
           </div>

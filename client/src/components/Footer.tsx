@@ -2,118 +2,127 @@ import { Link } from "wouter";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
+const BRAND_GREEN = "#013835";
+const CREAM = "#F1E7DC";
+
 export default function Footer() {
   return (
-    <footer className="bg-foreground text-primary-foreground py-12 md:py-16">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* About */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 flex items-center gap-3">
-              <img src={logo} alt="Aishi For Furries" className="h-8 w-8 object-contain" />
-              Aishi For Furries
-            </h3>
-            <p className="text-sm opacity-90">
-              Transforming compassion into action for Gurgaon's stray animals through rescue, rehabilitation, and care.
+    <footer style={{ backgroundColor: "#0A1E1D", color: CREAM }}>
+
+      {/* Main footer grid */}
+      <div className="container" style={{ paddingTop: "64px", paddingBottom: "48px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "48px", marginBottom: "48px" }}>
+
+          {/* Brand column */}
+          <div style={{ gridColumn: "span 1" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <img src={logo} alt="Aishi For Furries" style={{ height: 44, width: 44, objectFit: "contain", borderRadius: "50%", border: "1.5px solid rgba(241,231,220,0.25)" }} />
+              <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "1.1rem", color: CREAM, lineHeight: 1.2 }}>
+                Aishi For Furries
+              </span>
+            </div>
+            <p style={{ fontSize: "0.875rem", color: "rgba(241,231,220,0.65)", lineHeight: 1.7, marginBottom: "20px", maxWidth: "240px" }}>
+              Rescuing, rehabilitating, and caring for Gurgaon's most vulnerable dogs since 2017.
             </p>
+            <div style={{ display: "flex", gap: "12px" }}>
+              <a href="https://www.instagram.com/aishiforfurries/" target="_blank" rel="noopener noreferrer"
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.2)", color: CREAM, transition: "all 0.2s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(241,231,220,0.12)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"; }}
+              >
+                <Instagram size={16} />
+              </a>
+              <a href="https://www.facebook.com/aishiforfurries" target="_blank" rel="noopener noreferrer"
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.2)", color: CREAM, transition: "all 0.2s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(241,231,220,0.12)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"; }}
+              >
+                <Facebook size={16} />
+              </a>
+            </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about">
-                  <a className="hover:underline opacity-90 hover:opacity-100">About Us</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/our-work">
-                  <a className="hover:underline opacity-90 hover:opacity-100">Our Work</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/impact">
-                  <a className="hover:underline opacity-90 hover:opacity-100">Impact</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/adopt">
-                  <a className="hover:underline opacity-90 hover:opacity-100">Adopt/Foster</a>
-                </Link>
-              </li>
+            <p style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(241,231,220,0.45)", marginBottom: "16px" }}>Navigation</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {[
+                { label: "About Us", href: "/about" },
+                { label: "Our Work", href: "/our-work" },
+                { label: "Impact", href: "/impact" },
+                { label: "Adopt & Foster", href: "/adopt" },
+                { label: "Partner With Us", href: "/volunteer" },
+              ].map(link => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <a style={{ color: "rgba(241,231,220,0.7)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.15s" }}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = CREAM}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(241,231,220,0.7)"}
+                    >
+                      {link.label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Get Involved */}
+          {/* Get involved */}
           <div>
-            <h4 className="font-semibold mb-4">Get Involved</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/donate">
-                  <a className="hover:underline opacity-90 hover:opacity-100">Donate</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/volunteer">
-                  <a className="hover:underline opacity-90 hover:opacity-100">Volunteer</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <a className="hover:underline opacity-90 hover:opacity-100">Contact Us</a>
-                </Link>
-              </li>
+            <p style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(241,231,220,0.45)", marginBottom: "16px" }}>Get Involved</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {[
+                { label: "Donate", href: "/donate" },
+                { label: "Volunteer", href: "/volunteer" },
+                { label: "Foster a Dog", href: "/adopt" },
+                { label: "Contact Us", href: "/contact" },
+              ].map(link => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <a style={{ color: "rgba(241,231,220,0.7)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.15s" }}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = CREAM}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(241,231,220,0.7)"}
+                    >
+                      {link.label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2">
-                <Phone size={16} className="mt-0.5 flex-shrink-0" />
-                <a href="tel:+919873218040" className="hover:underline opacity-90 hover:opacity-100">
+            <p style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(241,231,220,0.45)", marginBottom: "16px" }}>Contact</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "14px" }}>
+              <li>
+                <a href="tel:+919873218040" style={{ display: "flex", alignItems: "center", gap: "10px", color: "rgba(241,231,220,0.7)", textDecoration: "none", fontSize: "0.9rem" }}>
+                  <Phone size={14} style={{ flexShrink: 0 }} />
                   +91 9873218040
                 </a>
               </li>
-              <li className="flex items-start gap-2">
-                <Mail size={16} className="mt-0.5 flex-shrink-0" />
-                <a href="mailto:aishiforfurries@gmail.com" className="hover:underline opacity-90 hover:opacity-100 break-all">
+              <li>
+                <a href="mailto:aishiforfurries@gmail.com" style={{ display: "flex", alignItems: "flex-start", gap: "10px", color: "rgba(241,231,220,0.7)", textDecoration: "none", fontSize: "0.9rem", wordBreak: "break-all" }}>
+                  <Mail size={14} style={{ flexShrink: 0, marginTop: "3px" }} />
                   aishiforfurries@gmail.com
                 </a>
               </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                <span className="opacity-90">Gurgaon, Haryana</span>
+              <li style={{ display: "flex", alignItems: "center", gap: "10px", color: "rgba(241,231,220,0.7)", fontSize: "0.9rem" }}>
+                <MapPin size={14} style={{ flexShrink: 0 }} />
+                Gurgaon, Haryana
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Social Links */}
-        <div className="border-t border-primary-foreground/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm opacity-80">
-            © 2025 Aishi For Furries. All rights reserved. | Registered NGO in Gurgaon
+        {/* Bottom bar */}
+        <div style={{ borderTop: "1px solid rgba(241,231,220,0.10)", paddingTop: "24px", display: "flex", flexDirection: "column", gap: "8px", alignItems: "center", textAlign: "center" }}>
+          <p style={{ fontSize: "0.8rem", color: "rgba(241,231,220,0.4)" }}>
+            © 2025 Aishi For Furries. Registered NGO · Gurgaon, Haryana
           </p>
-          <div className="flex items-center gap-4">
-            <a
-              href="https://www.instagram.com/aishiforfurries/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <Instagram size={20} />
-            </a>
-            <a
-              href="https://www.facebook.com/aishiforfurries"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <Facebook size={20} />
-            </a>
-          </div>
+          <p style={{ fontSize: "0.75rem", color: "rgba(241,231,220,0.25)" }}>
+            Every life matters. Every dog deserves a second chance.
+          </p>
         </div>
       </div>
     </footer>
