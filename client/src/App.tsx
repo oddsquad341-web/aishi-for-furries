@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
+import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Navigation from "./components/Navigation";
@@ -17,23 +18,32 @@ import Volunteer from "./pages/Volunteer";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
 
+// Scroll to top on every route change
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <>
+      <ScrollToTop />
       <Navigation />
       <Switch>
-        <Route path={"/"} component={Home} />
-        <Route path={"/about"} component={About} />
-        <Route path={"/our-work"} component={OurWork} />
-        <Route path={"/impact"} component={Impact} />
-        <Route path={"/rescue-stories"} component={RescueStories} />
-        <Route path={"/rescue-stories/:id"} component={RescueStoryDetail} />
-        <Route path={"/adopt"} component={Adopt} />
-        <Route path={"/volunteer"} component={Volunteer} />
-        <Route path={"/donate"} component={Donate} />
-        <Route path={"/contact"} component={Contact} />
-        <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/our-work" component={OurWork} />
+        <Route path="/impact" component={Impact} />
+        <Route path="/rescue-stories" component={RescueStories} />
+        <Route path="/rescue-stories/:id" component={RescueStoryDetail} />
+        <Route path="/adopt" component={Adopt} />
+        <Route path="/volunteer" component={Volunteer} />
+        <Route path="/donate" component={Donate} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
@@ -41,18 +51,10 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
           <div className="flex flex-col min-h-screen">

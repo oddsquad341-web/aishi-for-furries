@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img src={logo} alt="Aishi For Furries" className="h-10 w-10 object-contain rounded-full" style={{ border: "1.5px solid rgba(241,231,220,0.25)" }} />
-              <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "1.05rem", color: "#F1E7DC" }}>
+              <span style={{ fontFamily: "'Josefin Sans', sans-serif", fontSize: "1.05rem", color: "#F1E7DC" }}>
                 Aishi For Furries
               </span>
             </div>

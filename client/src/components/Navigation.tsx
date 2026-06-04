@@ -34,7 +34,7 @@ export default function Navigation() {
         <Link href="/">
           <a className="flex items-center gap-2 md:gap-3 no-underline flex-shrink-0">
             <img src={logo} alt="Aishi For Furries" className="h-9 w-9 md:h-10 md:w-10 object-contain rounded-full" />
-            <span className="text-base md:text-lg font-semibold" style={{ color: "#F1E7DC", fontFamily: "'DM Serif Display', Georgia, serif", fontWeight: 400 }}>
+            <span className="text-base md:text-lg font-semibold" style={{ color: "#F1E7DC", fontFamily: "'Josefin Sans', sans-serif", fontWeight: 400 }}>
               Aishi For Furries
             </span>
           </a>
