@@ -14,7 +14,7 @@ export default function Home() {
     { number: "500+", label: "Medical Cases", icon: Stethoscope },
     { number: "150+", label: "Dogs Fed Daily", icon: Utensils },
     { number: "40+", label: "Adoptions", icon: Users },
-    { number: "200+", label: "Sterilisations", icon: Scissors },
+    { number: "1500+", label: "Sterilisations", icon: Scissors },
   ];
 
   const pillars = [
@@ -140,18 +140,18 @@ export default function Home() {
             {stories.map((story, idx) => (
               <Link key={idx} href={`/rescue-stories/${story.slug}`}>
                 <a className="group block">
-                  <Card className="overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
-                    <div className="overflow-hidden h-52">
+                  <Card className="overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1 p-0">
+                    <div className="overflow-hidden h-52 rounded-t-xl">
                       <img
                         src={story.image}
                         alt={story.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-5">
                       <h3 className="text-lg font-bold mb-1">{story.name}</h3>
-                      <p className="text-foreground/70 text-sm">{story.description}</p>
-                      <span className="text-primary text-sm font-medium mt-3 inline-block">Read story →</span>
+                      <p className="text-sm mb-3" style={{ color: 'var(--card-foreground)', opacity: 0.75 }}>{story.description}</p>
+                      <span className="text-sm font-medium" style={{ color: 'var(--card-foreground)' }}>Read story →</span>
                     </div>
                   </Card>
                 </a>
