@@ -220,7 +220,8 @@ export default function Donate() {
                   setSelectedAmount(null);
                 }}
                 placeholder="Enter amount"
-                className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 rounded-lg focus:outline-none"
+                style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0" }}
               />
             </div>
 
@@ -249,7 +250,8 @@ export default function Donate() {
                 <input
                   type="text"
                   placeholder="Your name"
-                  className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none"
+                  style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0" }}
                 />
               </div>
               <div>
@@ -259,7 +261,8 @@ export default function Donate() {
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none"
+                  style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0" }}
                 />
               </div>
             </div>
@@ -287,7 +290,7 @@ export default function Donate() {
       {/* Fund allocation section removed per content update */}
 
       {/* Other Ways to Help */}
-      <section style={{ background: "#F1E7DC" }}>
+      <section style={{ background: "#F1E7DC", paddingTop: "80px", paddingBottom: "64px" }}>
         <div className="container">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Other Ways to Help</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

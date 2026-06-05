@@ -2,11 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import rescueImage from "@/assets/aishi/raw/18.jpg";
-import medicalImage from "@/assets/aishi/raw/2.png";
-import shelterImage from "@/assets/aishi/raw/3.jpg";
+import medicalImage from "@/assets/aishi/raw/WhatsApp Image 2025-11-21 at 10.50.01 PM.jpeg";
+import shelterImage from "@/assets/aishi/raw/WhatsApp Image 2025-11-21 at 11.22.29 PM (1).jpeg";
 import vaccinationImage from "@/assets/aishi/raw/4.jpg";
 import feedingImage from "@/assets/aishi/raw/5.jpg";
-import adoptionImage from "@/assets/aishi/raw/12.png";
+import adoptionImage from "@/assets/aishi/raw/53.jpg";
 
 export default function OurWork() {
   const programs = [
@@ -51,7 +51,6 @@ export default function OurWork() {
       icon: "💉",
       description: "Public health initiatives preventing disease and overpopulation.",
       details: [
-        "1500+ sterilisations completed",
         "Vaccination programmes for community dogs",
         "Disease prevention initiatives",
         "Population control to reduce street suffering",
@@ -88,17 +87,19 @@ export default function OurWork() {
     <div className="min-h-screen">
 
       {/* Opening */}
-      <section className="py-14 md:py-20 bg-background">
+      <section style={{ background: "linear-gradient(135deg, #012825 0%, #013835 70%)", padding: "96px 0 80px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: -60, top: -60, width: 300, height: 300, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.06)", pointerEvents: "none" }} />
         <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Work</h1>
-          <p className="text-lg md:text-xl text-foreground/80 max-w-3xl leading-relaxed">
+          <p style={{ color: "#DB453D", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>What We Do</p>
+          <h1 style={{ color: "#F1E7DC", fontFamily: "'Josefin Sans',sans-serif", maxWidth: 680, marginBottom: 20 }}>Our Work</h1>
+          <p style={{ color: "rgba(241,231,220,0.72)", fontFamily: "'Quicksand',sans-serif", fontSize: "1.05rem", maxWidth: 520, lineHeight: 1.8 }}>
             From the streets of Gurgaon to safe shelter and second chances, our work spans every stage of a dog's journey.
           </p>
         </div>
       </section>
 
       {/* Programs */}
-      <section style={{ background: "#F1E7DC" }}>
+      <section style={{ background: "#F1E7DC", paddingTop: "60px" }}>
         <div className="container space-y-20">
           {programs.map((program, idx) => (
             <div key={idx} className={`grid grid-cols-1 md:grid-cols-2 gap-10 items-center`}>
@@ -129,11 +130,11 @@ export default function OurWork() {
       <section className="py-14 md:py-20 bg-primary text-primary-foreground">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Every Rescue Story Starts Somewhere</h2>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
+          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: "#000" }}>
             Whether it's a meal, a vaccination, a surgery, or a forever home, every step of our work is made possible through the support of our community.
           </p>
           <Link href="/donate">
-            <a><Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-10 py-6 text-lg font-semibold">Donate Now</Button></a>
+            <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#DB453D", color: "#fff", padding: "14px 32px", borderRadius: 10, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "1rem", letterSpacing: "0.04em", textDecoration: "none", boxShadow: "0 4px 16px rgba(219,69,61,0.3)" }}>Donate Now</a>
           </Link>
         </div>
       </section>

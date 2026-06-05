@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#DB453D";
 
 const SvgInstagram = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -36,20 +36,20 @@ const linkStyle = { color: "rgba(241,231,220,0.6)", textDecoration: "none", font
 export default function Footer() {
   return (
     <footer style={{ backgroundColor: "#0A1E1D" }}>
-      <div className="container" style={{ paddingTop: 72, paddingBottom: 48 }}>
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 32 }}>
 
         {/* Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "40px 32px", marginBottom: 56 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr)", gap: "28px 24px", marginBottom: 36 }}>
 
           {/* Brand */}
           <div style={{ gridColumn: "span 1" }}>
             <Link href="/">
               <a style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 16 }}>
-                <img src={logo} alt="Aishi For Furries" style={{ height: 42, width: 42, objectFit: "contain", borderRadius: "50%", border: "1.5px solid rgba(241,231,220,0.2)" }} />
-                <span style={{ fontFamily: "'Josefin Sans',sans-serif", fontSize: "1rem", color: C, fontWeight: 600 }}>Aishi For Furries</span>
+                <img src={logo} alt="Aishi For Furries" style={{ height: 34, width: 34, objectFit: "contain", borderRadius: "50%", border: "1.5px solid rgba(241,231,220,0.2)" }} />
+                <span style={{ fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.9rem", color: C, fontWeight: 600 }}>Aishi For Furries</span>
               </a>
             </Link>
-            <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: 24, maxWidth: 220, fontFamily: "'Quicksand',sans-serif" }}>
+            <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.8rem", lineHeight: 1.65, marginBottom: 18, maxWidth: 200, fontFamily: "'Quicksand',sans-serif" }}>
               Rescuing, rehabilitating, and caring for Gurgaon's most vulnerable dogs since 2017.
             </p>
             {/* Social icons — explicit SVG so colour always renders */}

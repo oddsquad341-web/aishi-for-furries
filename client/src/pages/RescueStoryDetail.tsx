@@ -55,9 +55,11 @@ export default function RescueStoryDetail() {
 
   return (
     <div className="min-h-screen">
-      <section className="py-12 md:py-16 bg-background">
+      <section style={{ background: "linear-gradient(135deg, #012825 0%, #013835 70%)", padding: "96px 0 80px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: -60, top: -60, width: 300, height: 300, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.06)", pointerEvents: "none" }} />
         <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">{story.title}</h1>
+          <p style={{ color: "#DB453D", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>Rescue Story</p>
+          <h1 style={{ color: "#F1E7DC", fontFamily: "'Josefin Sans',sans-serif", maxWidth: 680, marginBottom: 20 }}>{story.title}</h1>
         </div>
       </section>
 

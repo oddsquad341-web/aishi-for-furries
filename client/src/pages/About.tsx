@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 const G = "#013835";
 const C = "#F1E7DC";
-const GOLD = "#B99572";
+const GOLD = "#DB453D";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -104,31 +104,31 @@ export default function About() {
 
           {/* DESKTOP — fixed heights, year pill guaranteed on line, no scroll */}
           <div className="hidden md:block" style={{ position: "relative" }}>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 120, height: 2, background: `linear-gradient(to right, transparent, rgba(185,149,114,0.45), transparent)`, zIndex: 0 }} />
-            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, 1fr)`, gap: 6, position: "relative" }}>
+            <div style={{ position: "absolute", left: 0, right: 0, top: 160, height: 2, background: `linear-gradient(to right, transparent, rgba(185,149,114,0.45), transparent)`, zIndex: 0 }} />
+            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, 1fr)`, gap: 8, position: "relative" }}>
               {journey.map((item, i) => (
                 <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", ...stagger(i, timelineReveal.visible) }}>
-                  {/* TOP — 110px, card if up:true */}
-                  <div style={{ height: 110, width: "100%", display: "flex", alignItems: "flex-end", paddingBottom: 7 }}>
+                  {/* TOP — 150px, card if up:true */}
+                  <div style={{ height: 150, width: "100%", display: "flex", alignItems: "flex-end", paddingBottom: 9 }}>
                     {item.up && (
-                      <div style={{ background: "rgba(241,231,220,0.07)", border: "1px solid rgba(241,231,220,0.09)", borderRadius: 9, padding: "8px 6px", textAlign: "center", width: "100%" }}>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.65rem", marginBottom: 3, lineHeight: 1.2 }}>{item.title}</div>
-                        <p style={{ color: "rgba(241,231,220,0.5)", fontSize: "0.58rem", lineHeight: 1.4, margin: 0 }}>{item.description}</p>
+                      <div style={{ background: "rgba(241,231,220,0.07)", border: "1px solid rgba(241,231,220,0.09)", borderRadius: 10, padding: "10px 8px", textAlign: "center", width: "100%" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.78rem", marginBottom: 4, lineHeight: 1.2 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.7rem", lineHeight: 1.45, margin: 0 }}>{item.description}</p>
                       </div>
                     )}
                   </div>
 
                   {/* YEAR pill ON the line */}
-                  <div style={{ position: "relative", zIndex: 2, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.65rem", padding: "4px 7px", borderRadius: 999, whiteSpace: "nowrap", boxShadow: "0 0 12px rgba(185,149,114,0.5)", flexShrink: 0 }}>
+                  <div style={{ position: "relative", zIndex: 2, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.75rem", padding: "5px 9px", borderRadius: 999, whiteSpace: "nowrap", boxShadow: "0 0 12px rgba(185,149,114,0.5)", flexShrink: 0 }}>
                     {item.year}
                   </div>
 
-                  {/* BOTTOM — 110px, card if up:false */}
-                  <div style={{ height: 110, width: "100%", display: "flex", alignItems: "flex-start", paddingTop: 7 }}>
+                  {/* BOTTOM — 150px, card if up:false */}
+                  <div style={{ height: 150, width: "100%", display: "flex", alignItems: "flex-start", paddingTop: 9 }}>
                     {!item.up && (
-                      <div style={{ background: "rgba(241,231,220,0.07)", border: "1px solid rgba(241,231,220,0.09)", borderRadius: 9, padding: "8px 6px", textAlign: "center", width: "100%" }}>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.65rem", marginBottom: 3, lineHeight: 1.2 }}>{item.title}</div>
-                        <p style={{ color: "rgba(241,231,220,0.5)", fontSize: "0.58rem", lineHeight: 1.4, margin: 0 }}>{item.description}</p>
+                      <div style={{ background: "rgba(241,231,220,0.07)", border: "1px solid rgba(241,231,220,0.09)", borderRadius: 10, padding: "10px 8px", textAlign: "center", width: "100%" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.78rem", marginBottom: 4, lineHeight: 1.2 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.7rem", lineHeight: 1.45, margin: 0 }}>{item.description}</p>
                       </div>
                     )}
                   </div>
@@ -209,9 +209,9 @@ export default function About() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
             {[{ label: "Donate", href: "/donate" }, { label: "Volunteer", href: "/volunteer" }, { label: "Adopt", href: "/adopt" }].map((btn, i) => (
               <Link key={i} href={btn.href}>
-                <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: G, color: C, padding: "14px 32px", borderRadius: 10, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.05em", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(1,56,53,0.15)" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 28px rgba(1,56,53,0.22)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(1,56,53,0.15)"; }}
+                <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#DB453D", color: "#fff", padding: "14px 32px", borderRadius: 10, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.05em", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(219,69,61,0.3)" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 28px rgba(219,69,61,0.4)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(219,69,61,0.3)"; }}
                 >
                   {btn.label} <ArrowRight size={14} />
                 </a>
