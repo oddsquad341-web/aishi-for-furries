@@ -237,8 +237,8 @@ export default function Impact() {
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                   <Link href="/donate"><a style={redBtn}>💛 Donate</a></Link>
-                  <Link href="/adopt"><a style={{background:"#DB453D", color:"#fff", display:"inline-flex", alignItems:"center", gap:8, padding:"13px 24px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.875rem", letterSpacing:"0.04em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(219,69,61,0.28)"}>🐾 Adopt</a></Link>
-                  <Link href="/volunteer"><a style={{background:"#DB453D", color:"#fff", display:"inline-flex", alignItems:"center", gap:8, padding:"13px 24px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.875rem", letterSpacing:"0.04em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(219,69,61,0.28)"}>🤝 Volunteer</a></Link>
+                  <Link href="/adopt"><a style={redBtn}>🐾 Adopt</a></Link>
+                  <Link href="/volunteer"><a style={redBtn}>🤝 Volunteer</a></Link>
                 </div>
               </div>
             </div>
