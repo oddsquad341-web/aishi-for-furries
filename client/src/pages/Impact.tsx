@@ -1,14 +1,14 @@
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import lakshmiImage from "@/assets/aishi/raw/15.jpg";
-import narayanImage from "@/assets/aishi/raw/14.jpg";
+import lakshmiImage from "@/assets/aishi/raw/15.png";
+import narayanImage from "@/assets/aishi/raw/14.png";
 import khushiImage from "@/assets/aishi/raw/13.png";
 import blackyImage from "@/assets/aishi/raw/17.png";
 import raniImage from "@/assets/aishi/raw/20.jpg";
 import adoptionImage from "@/assets/aishi/raw/23.jpg";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572"; const RED = "#DB453D";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC"; const RED = "#DB453D";
 
 function useReveal(t = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,7 +40,6 @@ export default function Impact() {
     { number: 500, suffix: "+", label: "Medical Cases" },
     { number: 150, suffix: "+", label: "Dogs Fed Daily" },
     { number: 40, suffix: "+", label: "Adoptions" },
-    { number: 1500, suffix: "+", label: "Sterilisations" },
     { number: 45, suffix: "+", label: "Shelter Residents" },
   ];
 
@@ -238,8 +237,8 @@ export default function Impact() {
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                   <Link href="/donate"><a style={redBtn}>💛 Donate</a></Link>
-                  <Link href="/adopt"><a style={{ ...greenBtn, background: "rgba(241,231,220,0.10)", color: C, boxShadow: "none", border: "1.5px solid rgba(241,231,220,0.25)" }}>🐾 Adopt</a></Link>
-                  <Link href="/volunteer"><a style={{ ...greenBtn, background: "rgba(241,231,220,0.10)", color: C, boxShadow: "none", border: "1.5px solid rgba(241,231,220,0.25)" }}>🤝 Volunteer</a></Link>
+                  <Link href="/adopt"><a style={{background:"#DB453D", color:"#fff", display:"inline-flex", alignItems:"center", gap:8, padding:"13px 24px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.875rem", letterSpacing:"0.04em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(219,69,61,0.28)"}>🐾 Adopt</a></Link>
+                  <Link href="/volunteer"><a style={{background:"#DB453D", color:"#fff", display:"inline-flex", alignItems:"center", gap:8, padding:"13px 24px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.875rem", letterSpacing:"0.04em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(219,69,61,0.28)"}>🤝 Volunteer</a></Link>
                 </div>
               </div>
             </div>

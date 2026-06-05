@@ -4,11 +4,11 @@ import { Heart, Users, Stethoscope, Utensils, Scissors, ArrowRight } from "lucid
 import heroImage from "@/assets/aishi/raw/2.png";
 import fosterPreview from "@/assets/aishi/raw/53.jpg";
 import founderImage from "@/assets/aishi/raw/0.png";
-import lakshmiImage from "@/assets/aishi/raw/15.jpg";
-import narayanImage from "@/assets/aishi/raw/14.jpg";
+import lakshmiImage from "@/assets/aishi/raw/15.png";
+import narayanImage from "@/assets/aishi/raw/14.png";
 import blackyImage from "@/assets/aishi/raw/17.png";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572"; const RED = "#DB453D";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC"; const RED = "#DB453D";
 
 function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,7 +50,6 @@ export default function Home() {
     { number: 500, suffix: "+", label: "Medical Cases", icon: Stethoscope },
     { number: 150, suffix: "+", label: "Dogs Fed Daily", icon: Utensils },
     { number: 40, suffix: "+", label: "Adoptions", icon: Users },
-    { number: 1500, suffix: "+", label: "Sterilisations", icon: Scissors },
   ];
 
   const pillars = [
@@ -185,7 +184,7 @@ export default function Home() {
       {/* ── DONATION BANNER ── */}
       <section style={{ background: `linear-gradient(135deg, #012825 0%, ${G} 60%, #025950 100%)`, padding: "96px 0", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", right: -80, top: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.05)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", left: -60, bottom: -60, width: 260, height: 260, borderRadius: "50%", border: `1px solid rgba(185,149,114,0.08)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", left: -60, bottom: -60, width: 260, height: 260, borderRadius: "50%", border: `1px solid rgba(241,231,220,0.35)`, pointerEvents: "none" }} />
         <div className="container" style={{ textAlign: "center", position: "relative" }}>
           <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>Make a Difference</p>
           <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif", maxWidth: 580, margin: "0 auto 20px" }}>Give Them a Second Chance</h2>
@@ -194,7 +193,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
             <Link href="/donate"><a style={redBtn} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; }}>💛 Donate Now</a></Link>
-            <Link href="/adopt"><a style={{ ...outlineBtn, background: "transparent" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.10)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}>🐾 Adopt a Dog</a></Link>
+            <Link href="/adopt"><a style={redBtn} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; }}>🐾 Adopt a Dog</a></Link>
           </div>
         </div>
       </section>
@@ -274,7 +273,7 @@ export default function Home() {
                   </div>
 
                   {/* YEAR pill — this IS the line marker, sits at top:120px */}
-                  <div style={{ position: "relative", zIndex: 2, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.7rem", padding: "4px 9px", borderRadius: 999, whiteSpace: "nowrap", boxShadow: "0 0 14px rgba(185,149,114,0.5)", letterSpacing: "0.01em", flexShrink: 0 }}>
+                  <div style={{ position: "relative", zIndex: 2, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.7rem", padding: "4px 9px", borderRadius: 999, whiteSpace: "nowrap", boxShadow: "0 0 14px rgba(241,231,220,0.35)", letterSpacing: "0.01em", flexShrink: 0 }}>
                     {item.year}
                   </div>
 
@@ -296,7 +295,7 @@ export default function Home() {
             <div style={{ position: "absolute", left: 5, top: 0, bottom: 0, width: 2, background: `linear-gradient(to bottom, transparent, rgba(1,56,53,0.2), transparent)` }} />
             {journey.map((item, i) => (
               <div key={i} style={{ display: "flex", gap: 18, marginBottom: 20, ...stg(i, timelineR.visible) }}>
-                <div style={{ width: 11, height: 11, borderRadius: "50%", background: GOLD, flexShrink: 0, marginTop: 6, position: "relative", left: -30, boxShadow: `0 0 8px rgba(185,149,114,0.4)` }} />
+                <div style={{ width: 11, height: 11, borderRadius: "50%", background: GOLD, flexShrink: 0, marginTop: 6, position: "relative", left: -30, boxShadow: `0 0 8px rgba(241,231,220,0.35)` }} />
                 <div style={{ background: G, border: "1px solid rgba(1,56,53,0.12)", borderRadius: 12, padding: "14px 16px", flex: 1, marginLeft: -12 }}>
                   <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, marginBottom: 3, fontSize: "0.9rem" }}>{item.year} · {item.title}</div>
                   <p style={{ color: "rgba(241,231,220,0.62)", fontSize: "0.82rem", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
