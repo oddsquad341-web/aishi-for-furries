@@ -87,19 +87,19 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
-                <input type="text" name="name" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.name} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%" }} required />
+                <input type="text" name="name" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.name} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%", color: "#000" }} required />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Email *</label>
-                <input type="email" name="email" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.email} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%" }} required />
+                <input type="email" name="email" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.email} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%", color: "#000" }} required />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
-                <input type="tel" name="phone" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.phone} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%" }} />
+                <input type="tel" name="phone" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.phone} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%", color: "#000" }} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Subject</label>
-                <select name="subject" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.subject} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%" }}>
+                <select name="subject" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.subject} onChange={handleInputChange} style={{ background: "#F1E7DC", border: "1px solid rgba(1,56,53,0.18)", width: "100%", color: "#000" }}>
                   <option value="">Select a subject</option>
                   <option value="donation">Donation Inquiry</option>
                   <option value="volunteer">Volunteer Question</option>
@@ -111,7 +111,7 @@ export default function Contact() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Message *</label>
-                <textarea name="message" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.message} onChange={handleInputChange} placeholder="Tell us how we can help..." style={{ background: "#F1E7DC" }} rows={6} required />
+                <textarea name="message" className="w-full px-4 py-3 rounded-lg focus:outline-none" value={formData.message} onChange={handleInputChange} placeholder="Tell us how we can help..." style={{ background: "#F1E7DC", color: "#000" }} rows={6} required />
               </div>
               <button type="submit" style={{ width: "100%", background: "#DB453D", color: "#fff", padding: "18px 32px", borderRadius: 10, border: "none", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "1rem", letterSpacing: "0.04em", cursor: "pointer", boxShadow: "0 4px 16px rgba(219,69,61,0.3)", transition: "all 0.2s" }}>Send Message</button>
             </form>
