@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import volunteerHero from "@/assets/aishi/raw/34.png";
+import volunteerHero from "@/assets/aishi/raw/48.jpg";
 
 const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#DB453D"; const RED = "#DB453D";
 

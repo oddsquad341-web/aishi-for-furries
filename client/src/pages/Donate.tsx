@@ -221,7 +221,7 @@ export default function Donate() {
                 }}
                 placeholder="Enter amount"
                 className="w-full px-4 py-3 rounded-lg focus:outline-none"
-                style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0" }}
+                style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0", color: "#000" }}
               />
             </div>
 
@@ -251,7 +251,7 @@ export default function Donate() {
                   type="text"
                   placeholder="Your name"
                   className="w-full px-4 py-3 rounded-lg focus:outline-none"
-                  style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0" }}
+                  style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0", color: "#000" }}
                 />
               </div>
               <div>
@@ -262,7 +262,7 @@ export default function Donate() {
                   type="email"
                   placeholder="your@email.com"
                   className="w-full px-4 py-3 rounded-lg focus:outline-none"
-                  style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0" }}
+                  style={{ border: "1px solid rgba(1,56,53,0.2)", background: "#F9F5F0", color: "#000" }}
                 />
               </div>
             </div>
