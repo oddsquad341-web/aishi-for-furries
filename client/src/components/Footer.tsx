@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC";
 
 const SvgInstagram = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

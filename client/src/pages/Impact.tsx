@@ -8,7 +8,7 @@ import blackyImage from "@/assets/aishi/raw/17.png";
 import raniImage from "@/assets/aishi/raw/20.jpg";
 import adoptionImage from "@/assets/aishi/raw/23.jpg";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC"; const RED = "#DB453D";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572"; const RED = "#DB453D";
 
 function useReveal(t = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -215,13 +215,13 @@ export default function Impact() {
         <div className="container" ref={r6.ref}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 48 }}>
             <div style={stg(0, r6.visible)}>
-              <div style={{ width: 40, height: 3, background: C, borderRadius: 2, marginBottom: 20, opacity: 0.3 }} />
+              <div style={{ width: 40, height: 3, background: GOLD, borderRadius: 2, marginBottom: 20 }} />
               <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, marginBottom: 20 }}>Creating Change Beyond Rescue</h2>
               <p style={{ color: "#5a3e2b", lineHeight: 1.85, marginBottom: 24 }}>Our work extends beyond individual rescues through:</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {["Community feeding", "Vaccination drives", "Sterilisation initiatives", "Awareness programmes", "School engagement"].map((item, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", background: G, borderRadius: 10 }}>
-                    <span style={{ width: 7, height: 7, borderRadius: "50%", background: C, flexShrink: 0, opacity: 0.5 }} />
+                    <span style={{ width: 7, height: 7, borderRadius: "50%", background: GOLD, flexShrink: 0 }} />
                     <span style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, color: C, fontSize: "0.9rem" }}>{item}</span>
                   </div>
                 ))}
@@ -229,7 +229,7 @@ export default function Impact() {
             </div>
             <div style={stg(1, r6.visible)}>
               <div style={{ background: G, borderRadius: 16, padding: "40px 32px", height: "100%" }}>
-                <p style={{ color: "rgba(241,231,220,0.5)", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>Help Us Create More Stories</p>
+                <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>Help Us Create More Stories</p>
                 <h3 style={{ fontFamily: "'Josefin Sans',sans-serif", color: C, fontSize: "1.4rem", marginBottom: 16 }}>Help Us Create More Stories Like These</h3>
                 {/* BLACK text as explicitly requested */}
                 <p style={{ color: "#000", fontFamily: "'Quicksand',sans-serif", fontSize: "0.95rem", lineHeight: 1.8, marginBottom: 28 }}>
@@ -237,8 +237,8 @@ export default function Impact() {
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                   <Link href="/donate"><a style={redBtn}>💛 Donate</a></Link>
-                  <Link href="/adopt"><a style={redBtn}>Adopt</a></Link>
-                  <Link href="/volunteer"><a style={redBtn}>Volunteer</a></Link>
+                  <Link href="/adopt"><a style={redBtn}>🐾 Adopt</a></Link>
+                  <Link href="/volunteer"><a style={redBtn}>🤝 Volunteer</a></Link>
                 </div>
               </div>
             </div>

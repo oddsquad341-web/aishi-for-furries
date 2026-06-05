@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC";
 const RED = "#DB453D";
 
 const navItems = [
