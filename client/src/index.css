@@ -42,7 +42,7 @@
 :root {
   --G:   #013835;
   --C:   #F1E7DC;
-  --GOLD: #B99572;
+  --GOLD: #F1E7DC;
   --primary:              #013835;
   --primary-foreground:   #F1E7DC;
   --background:           #F1E7DC;
@@ -55,7 +55,7 @@
   --secondary-foreground: #0D1F1E;
   --muted:                #e5dbd0;
   --muted-foreground:     #6B5D4E;
-  --accent:               #B99572;
+  --accent:               #F1E7DC;
   --accent-foreground:    #0D1F1E;
   --border:               rgba(1,56,53,0.12);
   --input:                #F1E7DC;
@@ -179,4 +179,9 @@ button:not([class*="ghost"]):not([class*="outline"]):not([variant="outline"]) {
   h2 { font-size: 1.5rem !important; }
   h3 { font-size: 1.1rem !important; }
   .container { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+}
+
+/* ── Ways to Help mobile fix ─ */
+@media (max-width: 639px) {
+  .ways-grid { grid-template-columns: 1fr !important; }
 }

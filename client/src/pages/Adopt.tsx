@@ -62,13 +62,13 @@ export default function Adopt() {
       </section>
 
       {/* WAYS TO HELP */}
-      <section style={{ background:C, padding:"96px 0" }}>
+      <section style={{ background:C, padding:"72px 0" }}>
         <div className="container" ref={r1.ref}>
-          <div style={{ textAlign:"center", marginBottom:52, ...stg(0, r1.visible) }}>
+          <div style={{ textAlign:"center", marginBottom:40, ...stg(0, r1.visible) }}>
             <p style={{ color:G, fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.72rem", fontWeight:700, letterSpacing:"0.18em", textTransform:"uppercase", marginBottom:12, opacity:0.5 }}>Choose Your Path</p>
             <h2 style={{ fontFamily:"'Josefin Sans',sans-serif", color:G }}>There's More Than One Way to Help</h2>
           </div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))", gap:20 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:16 }} className="ways-grid">
             {[
               { icon:"🏡", t:"Adopt", d:"Open your heart and home to a rescued dog looking for a family of their own." },
               { icon:"🐾", t:"Foster", d:"Provide a temporary home while a dog heals, gains confidence, or waits for their forever family." },
