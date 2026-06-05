@@ -2,10 +2,11 @@ import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { Heart, Users, Stethoscope, Utensils, Scissors, ArrowRight } from "lucide-react";
 import heroImage from "@/assets/aishi/raw/2.png";
+import fosterPreview from "@/assets/aishi/raw/53.jpg";
 import founderImage from "@/assets/aishi/raw/0.png";
-import lakshmiImage from "@/assets/aishi/raw/6.jpg";
-import narayanImage from "@/assets/aishi/raw/7.jpg";
-import blackyImage from "@/assets/aishi/raw/9.png";
+import lakshmiImage from "@/assets/aishi/raw/15.jpg";
+import narayanImage from "@/assets/aishi/raw/14.jpg";
+import blackyImage from "@/assets/aishi/raw/17.png";
 
 const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572"; const RED = "#DB453D";
 

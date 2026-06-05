@@ -1,12 +1,12 @@
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import lakshmiImage from "@/assets/aishi/raw/6.jpg";
-import narayanImage from "@/assets/aishi/raw/7.jpg";
-import khushiImage from "@/assets/aishi/raw/8.png";
-import blackyImage from "@/assets/aishi/raw/9.png";
-import raniImage from "@/assets/aishi/raw/10.png";
-import adoptionImage from "@/assets/aishi/raw/12.png";
+import lakshmiImage from "@/assets/aishi/raw/15.jpg";
+import narayanImage from "@/assets/aishi/raw/14.jpg";
+import khushiImage from "@/assets/aishi/raw/13.png";
+import blackyImage from "@/assets/aishi/raw/17.png";
+import raniImage from "@/assets/aishi/raw/20.jpg";
+import adoptionImage from "@/assets/aishi/raw/23.jpg";
 
 const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572"; const RED = "#DB453D";
 
