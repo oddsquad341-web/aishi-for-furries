@@ -2,12 +2,13 @@ import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { Heart, Users, Stethoscope, Utensils, Scissors, ArrowRight } from "lucide-react";
 import heroImage from "@/assets/aishi/raw/2.png";
+import fosterPreview from "@/assets/aishi/raw/53.jpg";
 import founderImage from "@/assets/aishi/raw/0.png";
 import lakshmiImage from "@/assets/aishi/raw/15.png";
 import narayanImage from "@/assets/aishi/raw/14.png";
 import blackyImage from "@/assets/aishi/raw/17.png";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572"; const RED = "#DB453D";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC"; const RED = "#DB453D";
 
 function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
@@ -49,7 +50,6 @@ export default function Home() {
     { number: 500, suffix: "+", label: "Medical Cases", icon: Stethoscope },
     { number: 150, suffix: "+", label: "Dogs Fed Daily", icon: Utensils },
     { number: 40, suffix: "+", label: "Adoptions", icon: Users },
-    { number: 1500, suffix: "+", label: "Sterilisations", icon: Scissors },
   ];
 
   const pillars = [
@@ -184,7 +184,7 @@ export default function Home() {
       {/* ── DONATION BANNER ── */}
       <section style={{ background: `linear-gradient(135deg, #012825 0%, ${G} 60%, #025950 100%)`, padding: "96px 0", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", right: -80, top: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.05)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", left: -60, bottom: -60, width: 260, height: 260, borderRadius: "50%", border: `1px solid rgba(185,149,114,0.08)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", left: -60, bottom: -60, width: 260, height: 260, borderRadius: "50%", border: `1px solid rgba(241,231,220,0.35)`, pointerEvents: "none" }} />
         <div className="container" style={{ textAlign: "center", position: "relative" }}>
           <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>Make a Difference</p>
           <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif", maxWidth: 580, margin: "0 auto 20px" }}>Give Them a Second Chance</h2>
@@ -193,7 +193,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
             <Link href="/donate"><a style={redBtn} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; }}>💛 Donate Now</a></Link>
-            <Link href="/adopt"><a style={{ ...outlineBtn, background: "transparent" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.10)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}>🐾 Adopt a Dog</a></Link>
+            <Link href="/adopt"><a style={redBtn} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; }}>🐾 Adopt a Dog</a></Link>
           </div>
         </div>
       </section>
@@ -255,28 +255,34 @@ export default function Home() {
             <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>Since 2017</p>
             <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G }}>Our Journey</h2>
           </div>
-          {/* Desktop */}
-          <div className="hidden md:block" style={{ position: "relative", overflowX: "auto" }}>
-            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 2, background: `linear-gradient(to right, transparent, rgba(1,56,53,0.25), transparent)`, transform: "translateY(-50%)" }} />
-            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, 1fr)`, gap: 12, minWidth: 640 }}>
+          {/* Desktop timeline — fixed heights, year pill guaranteed on line */}
+          <div className="hidden md:block" style={{ position: "relative" }}>
+            {/* Line at exactly 120px from top of grid — matches cardH + gap */}
+            <div style={{ position: "absolute", left: 0, right: 0, top: 120, height: 2, background: `linear-gradient(to right, transparent, rgba(1,56,53,0.35), transparent)`, zIndex: 0 }} />
+            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, 1fr)`, gap: 8, alignItems: "start" }}>
               {journey.map((item, i) => (
                 <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", ...stg(i, timelineR.visible) }}>
-                  <div style={{ height: 150, display: "flex", alignItems: "flex-end", paddingBottom: 16, width: "100%", justifyContent: "center" }}>
+                  {/* TOP card — exactly 110px tall, sits above the line */}
+                  <div style={{ height: 110, width: "100%", display: "flex", alignItems: "flex-end", paddingBottom: 8 }}>
                     {item.up && (
-                      <div style={{ background: G, border: "1px solid rgba(1,56,53,0.15)", borderRadius: 12, padding: "14px 12px", textAlign: "center", width: "100%" }}>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, fontSize: "1rem", marginBottom: 4 }}>{item.year}</div>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, color: C, fontSize: "0.72rem", marginBottom: 5 }}>{item.title}</div>
-                        <p style={{ color: "rgba(241,231,220,0.6)", fontSize: "0.68rem", lineHeight: 1.55, margin: 0 }}>{item.description}</p>
+                      <div style={{ background: G, borderRadius: 10, padding: "9px 8px", textAlign: "center", width: "100%", border: "1px solid rgba(241,231,220,0.08)" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.72rem", marginBottom: 3, lineHeight: 1.2 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.6rem", lineHeight: 1.45, margin: 0 }}>{item.description}</p>
                       </div>
                     )}
                   </div>
-                  <div style={{ width: 13, height: 13, borderRadius: "50%", background: GOLD, border: `3px solid ${C}`, flexShrink: 0, zIndex: 1, boxShadow: `0 0 10px rgba(185,149,114,0.4)` }} />
-                  <div style={{ height: 150, display: "flex", alignItems: "flex-start", paddingTop: 16, width: "100%", justifyContent: "center" }}>
+
+                  {/* YEAR pill — this IS the line marker, sits at top:120px */}
+                  <div style={{ position: "relative", zIndex: 2, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.7rem", padding: "4px 9px", borderRadius: 999, whiteSpace: "nowrap", boxShadow: "0 0 14px rgba(241,231,220,0.35)", letterSpacing: "0.01em", flexShrink: 0 }}>
+                    {item.year}
+                  </div>
+
+                  {/* BOTTOM card — sits below the line */}
+                  <div style={{ height: 110, width: "100%", display: "flex", alignItems: "flex-start", paddingTop: 8 }}>
                     {!item.up && (
-                      <div style={{ background: G, border: "1px solid rgba(1,56,53,0.15)", borderRadius: 12, padding: "14px 12px", textAlign: "center", width: "100%" }}>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, fontSize: "1rem", marginBottom: 4 }}>{item.year}</div>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, color: C, fontSize: "0.72rem", marginBottom: 5 }}>{item.title}</div>
-                        <p style={{ color: "rgba(241,231,220,0.6)", fontSize: "0.68rem", lineHeight: 1.55, margin: 0 }}>{item.description}</p>
+                      <div style={{ background: G, borderRadius: 10, padding: "9px 8px", textAlign: "center", width: "100%", border: "1px solid rgba(241,231,220,0.08)" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.72rem", marginBottom: 3, lineHeight: 1.2 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.6rem", lineHeight: 1.45, margin: 0 }}>{item.description}</p>
                       </div>
                     )}
                   </div>
@@ -289,7 +295,7 @@ export default function Home() {
             <div style={{ position: "absolute", left: 5, top: 0, bottom: 0, width: 2, background: `linear-gradient(to bottom, transparent, rgba(1,56,53,0.2), transparent)` }} />
             {journey.map((item, i) => (
               <div key={i} style={{ display: "flex", gap: 18, marginBottom: 20, ...stg(i, timelineR.visible) }}>
-                <div style={{ width: 11, height: 11, borderRadius: "50%", background: GOLD, flexShrink: 0, marginTop: 6, position: "relative", left: -30, boxShadow: `0 0 8px rgba(185,149,114,0.4)` }} />
+                <div style={{ width: 11, height: 11, borderRadius: "50%", background: GOLD, flexShrink: 0, marginTop: 6, position: "relative", left: -30, boxShadow: `0 0 8px rgba(241,231,220,0.35)` }} />
                 <div style={{ background: G, border: "1px solid rgba(1,56,53,0.12)", borderRadius: 12, padding: "14px 16px", flex: 1, marginLeft: -12 }}>
                   <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, marginBottom: 3, fontSize: "0.9rem" }}>{item.year} · {item.title}</div>
                   <p style={{ color: "rgba(241,231,220,0.62)", fontSize: "0.82rem", lineHeight: 1.6, margin: 0 }}>{item.description}</p>

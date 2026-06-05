@@ -180,5 +180,3 @@ button:not([class*="ghost"]):not([class*="outline"]):not([variant="outline"]) {
   h3 { font-size: 1.1rem !important; }
   .container { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
 }
-
-@media (max-width: 639px) { .ways-grid { grid-template-columns: 1fr !important; } }

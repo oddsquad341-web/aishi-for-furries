@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import volunteerHero from "@/assets/aishi/raw/15.png";
 
-const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#F1E7DC";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
 
 function useReveal(t = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,7 +16,7 @@ function useReveal(t = 0.1) {
   return { ref, visible: v };
 }
 const s = (i: number, v: boolean) => ({ opacity: v ? 1 : 0, transform: v ? "translateY(0)" : "translateY(30px)", transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i*0.09}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i*0.09}s` });
-const btn = (outline = false) => ({ display:"inline-flex" as const, alignItems:"center" as const, gap:8, background: outline ? "transparent" : C, color: outline ? C : G, border: outline ? `1.5px solid rgba(241,231,220,0.4)` : "none", padding:"14px 30px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow: outline ? "none" : "0 4px 16px rgba(241,231,220,0.35)" });
+const btn = (outline = false) => ({ display:"inline-flex" as const, alignItems:"center" as const, gap:8, background: outline ? "transparent" : C, color: outline ? C : G, border: outline ? `1.5px solid rgba(241,231,220,0.4)` : "none", padding:"14px 30px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow: outline ? "none" : "0 4px 16px rgba(185,149,114,0.2)" });
 
 export default function Volunteer() {
   const areas = [
@@ -63,7 +63,7 @@ export default function Volunteer() {
               <p style={{ color: "#5a3e2b", lineHeight: 1.85 }}>What began with two community dogs has grown into a registered animal welfare organisation caring for over 150 community dogs and 45+ permanent residents. Our work focuses on direct, measurable impact — from emergency medical treatment and feeding programs to sterilisation, rehabilitation, and lifelong care.</p>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, ...s(1, r1.visible) }}>
-              {[{ n: "150+", l: "Community Dogs" }, { n: "45+", l: "Permanent Residents" }, { n: "500+", l: "Medical Cases" }].map((stat, i) => (
+              {[{ n: "150+", l: "Community Dogs" }, { n: "45+", l: "Permanent Residents" }, { n: "1500+", l: "Sterilisations" }, { n: "500+", l: "Medical Cases" }].map((stat, i) => (
                 <div key={i} style={{ background: G, borderRadius: 14, padding: "28px 20px", textAlign: "center" }}>
                   <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "1.8rem", color: GOLD, marginBottom: 6 }}>{stat.n}</div>
                   <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.75rem", color: "rgba(241,231,220,0.65)", letterSpacing: "0.06em", textTransform: "uppercase" }}>{stat.l}</div>
@@ -155,12 +155,12 @@ export default function Volunteer() {
               We're always looking to collaborate with organisations that share our commitment to compassion and community welfare.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
-              <a href="mailto:aishiforfurries@gmail.com" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#DB453D", color:"#fff", padding:"14px 32px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(219,69,61,0.28)" }}
+              <a href="mailto:aishiforfurries@gmail.com" style={{ display:"inline-flex", alignItems:"center", gap:8, background: G, color: C, padding:"14px 32px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(1,56,53,0.15)" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform="none"; }}>
                 ✉ Email Us <ArrowRight size={14} />
               </a>
-              <a href="tel:+919873218040" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#DB453D", color:"#fff", padding:"14px 32px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(219,69,61,0.28)" }}>
+              <a href="tel:+919873218040" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"transparent", border:`2px solid ${G}`, color:G, padding:"14px 32px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none" }}>
                 📞 Call Us
               </a>
             </div>
