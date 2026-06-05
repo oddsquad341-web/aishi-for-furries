@@ -98,7 +98,7 @@ export default function OurWork() {
       </section>
 
       {/* Programs */}
-      <section className="py-14 md:py-20 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container space-y-20">
           {programs.map((program, idx) => (
             <div key={idx} className={`grid grid-cols-1 md:grid-cols-2 gap-10 items-center`}>

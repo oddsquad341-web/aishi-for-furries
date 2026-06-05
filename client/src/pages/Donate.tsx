@@ -173,7 +173,7 @@ export default function Donate() {
       </section>
 
       {/* Donation Form */}
-      <section className="py-12 md:py-16 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container max-w-2xl">
           <Card className="p-8 border-border">
             <h2 className="text-2xl font-bold mb-6 text-foreground">Make Your Donation</h2>
@@ -287,7 +287,7 @@ export default function Donate() {
       {/* Fund allocation section removed per content update */}
 
       {/* Other Ways to Help */}
-      <section className="py-12 md:py-16 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Other Ways to Help</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

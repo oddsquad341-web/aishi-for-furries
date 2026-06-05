@@ -42,7 +42,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Info */}
-      <section className="py-14 md:py-20 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             <Card className="p-6 text-center">
@@ -85,19 +85,19 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
-                <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground" required />
+                <input type="text" name="name" value={formData.name} onChange={handleInputChange} style={{ background: "#F1E7DC" }} required />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Email *</label>
-                <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground" required />
+                <input type="email" name="email" value={formData.email} onChange={handleInputChange} style={{ background: "#F1E7DC" }} required />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground" />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} style={{ background: "#F1E7DC" }} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Subject</label>
-                <select name="subject" value={formData.subject} onChange={handleInputChange} className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground">
+                <select name="subject" value={formData.subject} onChange={handleInputChange} style={{ background: "#F1E7DC" }}>
                   <option value="">Select a subject</option>
                   <option value="donation">Donation Inquiry</option>
                   <option value="volunteer">Volunteer Question</option>
@@ -109,7 +109,7 @@ export default function Contact() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Message *</label>
-                <textarea name="message" value={formData.message} onChange={handleInputChange} placeholder="Tell us how we can help..." className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground" rows={6} required />
+                <textarea name="message" value={formData.message} onChange={handleInputChange} placeholder="Tell us how we can help..." style={{ background: "#F1E7DC" }} rows={6} required />
               </div>
               <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-lg font-semibold">Send Message</Button>
             </form>
@@ -118,7 +118,7 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="py-14 md:py-20 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
           <div className="space-y-4">

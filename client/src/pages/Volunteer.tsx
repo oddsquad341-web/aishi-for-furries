@@ -1,161 +1,172 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import volunteerHero from "@/assets/aishi/raw/15.png";
 
-const BRAND_GREEN = "#013835";
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
+
+function useReveal(t = 0.1) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [v, setV] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.disconnect(); } }, { threshold: t });
+    obs.observe(el); return () => obs.disconnect();
+  }, []);
+  return { ref, visible: v };
+}
+const s = (i: number, v: boolean) => ({ opacity: v ? 1 : 0, transform: v ? "translateY(0)" : "translateY(30px)", transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i*0.09}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i*0.09}s` });
+const btn = (outline = false) => ({ display:"inline-flex" as const, alignItems:"center" as const, gap:8, background: outline ? "transparent" : C, color: outline ? C : G, border: outline ? `1.5px solid rgba(241,231,220,0.4)` : "none", padding:"14px 30px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow: outline ? "none" : "0 4px 16px rgba(185,149,114,0.2)" });
 
 export default function Volunteer() {
   const areas = [
-    {
-      number: "1",
-      title: "CSR Sponsorships",
-      items: ["Medical treatments", "Rescue operations", "Shelter development", "Daily feeding programmes", "Vaccination drives", "Sterilisation initiatives"],
-    },
-    {
-      number: "2",
-      title: "Infrastructure Support",
-      items: ["Kennels", "Medical rooms", "Rehabilitation areas", "Shelter expansion", "Equipment and supplies"],
-    },
-    {
-      number: "3",
-      title: "Employee Engagement",
-      items: ["Shelter visits", "Volunteering days", "Donation drives", "Awareness sessions"],
-    },
-    {
-      number: "4",
-      title: "School & Community Initiatives",
-      items: ["Awareness workshops", "Fundraising drives", "Student engagement programmes", "Community welfare initiatives"],
-    },
-    {
-      number: "5",
-      title: "In-Kind Contributions",
-      items: ["Dog food", "Medicines", "Medical equipment", "Bedding", "Cleaning supplies", "Transport support"],
-    },
+    { n: "01", title: "CSR Sponsorships", items: ["Medical treatments", "Rescue operations", "Shelter development", "Daily feeding programmes", "Vaccination drives", "Sterilisation initiatives"] },
+    { n: "02", title: "Infrastructure Support", items: ["Kennels", "Medical rooms", "Rehabilitation areas", "Shelter expansion", "Equipment and supplies"] },
+    { n: "03", title: "Employee Engagement", items: ["Shelter visits", "Volunteering days", "Donation drives", "Awareness sessions"] },
+    { n: "04", title: "School & Community", items: ["Awareness workshops", "Fundraising drives", "Student engagement programmes", "Community welfare initiatives"] },
+    { n: "05", title: "In-Kind Contributions", items: ["Dog food", "Medicines", "Medical equipment", "Bedding", "Cleaning supplies", "Transport support"] },
   ];
+  const process = ["Initial conversation", "Identify areas of support", "Define scope and timelines", "Execute and report impact", "Share updates and outcomes"];
 
-  const process = [
-    "Initial conversation",
-    "Identify areas of support",
-    "Define scope and timelines",
-    "Execute and report impact",
-    "Share updates and outcomes",
-  ];
+  const r1 = useReveal(); const r2 = useReveal(); const r3 = useReveal();
+  const r4 = useReveal(); const r5 = useReveal(); const r6 = useReveal();
 
   return (
-    <div className="min-h-screen">
+    <div style={{ backgroundColor: C }}>
 
-      {/* Hero Section */}
-      <section className="relative h-[480px] md:h-[540px] overflow-hidden">
-        <img src={volunteerHero} alt="Partner with Aishiforfurries" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative h-full container flex flex-col justify-center">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">Partner With Us</h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Create meaningful impact for animals in need. Whether you're a company, school, institution, or community group, your support can help provide food, medical care, shelter, and second chances to vulnerable dogs across Gurgaon.
-            </p>
+      {/* HERO */}
+      <section style={{ position: "relative", height: "80svh", minHeight: 480, maxHeight: 680, overflow: "hidden" }}>
+        <img src={volunteerHero} alt="Partner with us" style={{ position: "absolute", inset: 0, width: "100%", height: "115%", objectFit: "cover" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(1,56,53,0.88) 0%, rgba(0,0,0,0.3) 100%)" }} />
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: `linear-gradient(to bottom, transparent, ${GOLD}, transparent)` }} />
+        <div className="container" style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 72 }}>
+          <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 16 }}>Collaborate With Us</p>
+          <h1 style={{ color: "#fff", fontFamily: "'Josefin Sans',sans-serif", maxWidth: 600, marginBottom: 24 }}>Partner With Us</h1>
+          <p style={{ color: "rgba(255,255,255,0.82)", fontFamily: "'Quicksand',sans-serif", fontSize: "1.05rem", maxWidth: 500, lineHeight: 1.8, marginBottom: 36 }}>
+            Create meaningful impact for animals in need. Whether you're a company, school, or community group — your support can change lives.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <a href="mailto:aishiforfurries@gmail.com" style={btn()}>✉ Get in Touch <ArrowRight size={14} /></a>
+            <a href="#areas" style={btn(true)}>Explore Areas</a>
           </div>
         </div>
       </section>
 
-      {/* Why Partner */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Grassroots Impact. Tangible Results.</h2>
-          <p className="text-lg text-foreground/80 leading-relaxed">
-            What began with two community dogs has grown into a registered animal welfare organisation caring for over 150 community dogs and 45+ permanent residents. Our work focuses on direct, measurable impact — from emergency medical treatment and feeding programs to sterilisation, rehabilitation, and lifelong care.
-          </p>
+      {/* WHY PARTNER */}
+      <section style={{ background: C, padding: "96px 0" }}>
+        <div className="container" ref={r1.ref}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 56, alignItems: "center" }}>
+            <div style={s(0, r1.visible)}>
+              <div style={{ width: 40, height: 3, background: GOLD, borderRadius: 2, marginBottom: 20 }} />
+              <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Why Partner</p>
+              <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, marginBottom: 24 }}>Grassroots Impact.<br />Tangible Results.</h2>
+              <p style={{ color: "#5a3e2b", lineHeight: 1.85 }}>What began with two community dogs has grown into a registered animal welfare organisation caring for over 150 community dogs and 45+ permanent residents. Our work focuses on direct, measurable impact — from emergency medical treatment and feeding programs to sterilisation, rehabilitation, and lifelong care.</p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, ...s(1, r1.visible) }}>
+              {[{ n: "150+", l: "Community Dogs" }, { n: "45+", l: "Permanent Residents" }, { n: "1500+", l: "Sterilisations" }, { n: "500+", l: "Medical Cases" }].map((stat, i) => (
+                <div key={i} style={{ background: G, borderRadius: 14, padding: "28px 20px", textAlign: "center" }}>
+                  <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "1.8rem", color: GOLD, marginBottom: 6 }}>{stat.n}</div>
+                  <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.75rem", color: "rgba(241,231,220,0.65)", letterSpacing: "0.06em", textTransform: "uppercase" }}>{stat.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Areas of Partnership */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Areas of Partnership</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {areas.map((area, idx) => (
-              <Card key={idx} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-sm flex-shrink-0" style={{ backgroundColor: BRAND_GREEN }}>
-                    {area.number}
-                  </div>
-                  <h3 className="text-lg font-bold" style={{ color: "var(--card-foreground)" }}>{area.title}</h3>
-                </div>
-                <ul className="space-y-2">
-                  {area.items.map((item, iidx) => (
-                    <li key={iidx} className="flex items-start gap-2 text-sm" style={{ color: "var(--card-foreground)", opacity: 0.8 }}>
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: BRAND_GREEN }}></span>
-                      {item}
+      {/* AREAS */}
+      <section id="areas" style={{ background: G, padding: "96px 0" }}>
+        <div className="container" ref={r2.ref}>
+          <div style={{ textAlign: "center", marginBottom: 56, ...s(0, r2.visible) }}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>How You Can Help</p>
+            <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif" }}>Areas of Partnership</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
+            {areas.map((a, i) => (
+              <div key={i} style={{ background: "rgba(241,231,220,0.06)", border: "1px solid rgba(241,231,220,0.10)", borderRadius: 14, padding: "28px 22px", transition: "all 0.28s", ...s(i+1, r2.visible) }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(241,231,220,0.11)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-5px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(241,231,220,0.06)"; (e.currentTarget as HTMLElement).style.transform = "none"; }}>
+                <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "1.6rem", color: GOLD, opacity: 0.6, marginBottom: 12 }}>{a.n}</div>
+                <h3 style={{ fontFamily: "'Josefin Sans',sans-serif", color: C, fontWeight: 700, fontSize: "1rem", marginBottom: 14 }}>{a.title}</h3>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 8 }}>
+                  {a.items.map((item, j) => (
+                    <li key={j} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(241,231,220,0.65)", fontSize: "0.825rem" }}>
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: GOLD, flexShrink: 0 }} />{item}
                     </li>
                   ))}
                 </ul>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Current Needs */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Areas Currently Seeking Support</h2>
-          <ul className="space-y-3">
-            {["Shelter infrastructure", "Medical funds", "Sterilisation drives", "Monthly feeding programme", "Rehabilitation support"].map((need, idx) => (
-              <li key={idx} className="flex items-center gap-3 text-base md:text-lg text-foreground/80">
-                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: BRAND_GREEN }}></span>
-                {need}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Why Animal Welfare Matters */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Animal Welfare Matters</h2>
-          <p className="text-lg text-foreground/80 leading-relaxed">
-            Animal welfare plays an important role in creating healthier and more compassionate communities. Through vaccination, sterilisation, rescue, and rehabilitation, organisations can contribute meaningfully towards public health, sustainability, and community wellbeing.
-          </p>
-        </div>
-      </section>
-
-      {/* Partnership Process */}
-      <section className="py-14 md:py-20" style={{ backgroundColor: "#FBF7EE" }}>
-        <div className="container max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center" style={{ color: BRAND_GREEN }}>How We Work Together</h2>
-          <div className="space-y-4">
-            {process.map((step, idx) => (
-              <div key={idx} className="flex items-center gap-5 bg-white rounded-xl p-5 shadow-sm" style={{ border: "1px solid rgba(1,56,53,0.12)" }}>
-                <div className="w-10 h-10 rounded-full text-white flex items-center justify-center font-bold text-lg flex-shrink-0" style={{ backgroundColor: BRAND_GREEN }}>
-                  {idx + 1}
-                </div>
-                <span className="text-foreground font-medium text-base md:text-lg">{step}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA Banner */}
-      <section className="py-14 md:py-20 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's Create Impact Together</h2>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
-            We're always looking to collaborate with organisations that share our commitment to compassion and community welfare. Whether you're looking to support a specific initiative or build a long-term partnership, we'd love to hear from you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="mailto:aishiforfurries@gmail.com">
-              <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-8 py-6 text-lg font-semibold">✉ Email Us</Button>
-            </a>
-            <a href="tel:+919873218040">
-              <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg font-semibold">📞 Call Us</Button>
-            </a>
+      {/* CURRENT NEEDS */}
+      <section style={{ background: C, padding: "80px 0" }}>
+        <div className="container" ref={r3.ref}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 48, alignItems: "center" }}>
+            <div style={s(0, r3.visible)}>
+              <div style={{ width: 40, height: 3, background: GOLD, borderRadius: 2, marginBottom: 20 }} />
+              <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, marginBottom: 24 }}>Currently Seeking Support</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                {["Shelter infrastructure", "Medical funds", "Sterilisation drives", "Monthly feeding programme", "Rehabilitation support"].map((n, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", background: G, borderRadius: 10, color: C, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, fontSize: "0.9rem" }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: GOLD, flexShrink: 0 }} />{n}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={s(1, r3.visible)}>
+              <div style={{ width: 40, height: 3, background: GOLD, borderRadius: 2, marginBottom: 20 }} />
+              <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, marginBottom: 20 }}>Why Animal Welfare Matters</h2>
+              <p style={{ color: "#5a3e2b", lineHeight: 1.85 }}>Animal welfare plays an important role in creating healthier and more compassionate communities. Through vaccination, sterilisation, rescue, and rehabilitation, organisations can contribute meaningfully towards public health, sustainability, and community wellbeing.</p>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* PROCESS */}
+      <section style={{ background: G, padding: "96px 0" }}>
+        <div className="container" ref={r4.ref}>
+          <div style={{ textAlign: "center", marginBottom: 56, ...s(0, r4.visible) }}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Simple Process</p>
+            <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif" }}>How We Work Together</h2>
+          </div>
+          <div style={{ maxWidth: 640, margin: "0 auto", display: "flex", flexDirection: "column", gap: 4 }}>
+            {process.map((step, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 20, padding: "20px 24px", background: "rgba(241,231,220,0.06)", border: "1px solid rgba(241,231,220,0.10)", borderRadius: 12, ...s(i+1, r4.visible), transition: `all 0.28s, opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${(i+1)*0.09}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${(i+1)*0.09}s` }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(241,231,220,0.11)"; (e.currentTarget as HTMLElement).style.transform = "translateX(6px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(241,231,220,0.06)"; (e.currentTarget as HTMLElement).style.transform = "none"; }}>
+                <div style={{ width: 36, height: 36, borderRadius: "50%", background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.875rem", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{i+1}</div>
+                <span style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, color: C, fontSize: "0.95rem" }}>{step}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section style={{ background: C, padding: "100px 0", textAlign: "center" }}>
+        <div className="container" ref={r6.ref}>
+          <div style={s(0, r6.visible)}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 16 }}>Get In Touch</p>
+            <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, maxWidth: 540, margin: "0 auto 20px" }}>Let's Create Impact Together</h2>
+            <p style={{ color: "#5a3e2b", fontFamily: "'Quicksand',sans-serif", fontSize: "1.05rem", maxWidth: 480, margin: "0 auto 44px", lineHeight: 1.8 }}>
+              We're always looking to collaborate with organisations that share our commitment to compassion and community welfare.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
+              <a href="mailto:aishiforfurries@gmail.com" style={{ display:"inline-flex", alignItems:"center", gap:8, background: G, color: C, padding:"14px 32px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none", transition:"all 0.2s", boxShadow:"0 4px 16px rgba(1,56,53,0.15)" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform="none"; }}>
+                ✉ Email Us <ArrowRight size={14} />
+              </a>
+              <a href="tel:+919873218040" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"transparent", border:`2px solid ${G}`, color:G, padding:"14px 32px", borderRadius:10, fontFamily:"'Josefin Sans',sans-serif", fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.05em", textDecoration:"none" }}>
+                📞 Call Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

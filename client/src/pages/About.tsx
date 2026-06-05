@@ -1,108 +1,150 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useEffect, useRef, useState } from "react";
 import founderImage from "@/assets/aishi/raw/0.png";
+import { ArrowRight } from "lucide-react";
 
-const BRAND_GREEN = "#013835";
+const G = "#013835";
+const C = "#F1E7DC";
+const GOLD = "#B99572";
+
+function useReveal(threshold = 0.1) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold });
+    obs.observe(el); return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, visible };
+}
+
+const stagger = (i: number, visible: boolean) => ({
+  opacity: visible ? 1 : 0,
+  transform: visible ? "translateY(0)" : "translateY(32px)",
+  transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.08}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.08}s`,
+});
 
 export default function About() {
   const values = [
-    {
-      title: "Compassion",
-      description: "We believe every animal deserves kindness, care, and the chance to live with dignity.",
-    },
-    {
-      title: "Responsibility",
-      description: "We are committed to the long-term wellbeing of every animal that comes under our care.",
-    },
-    {
-      title: "Community",
-      description: "Lasting change is only possible through collective action. We work alongside volunteers, adopters, donors, and supporters to create greater impact.",
-    },
-    {
-      title: "Dignity",
-      description: "Every life matters. We strive to provide safety, comfort, medical care, and respect to animals at every stage of their journey.",
-    },
-    {
-      title: "Commitment",
-      description: "We show up every day with consistency, patience, and dedication — to improve the lives of animals in need.",
-    },
+    { title: "Compassion", description: "We believe every animal deserves kindness, care, and the chance to live with dignity." },
+    { title: "Responsibility", description: "We are committed to the long-term wellbeing of every animal that comes under our care." },
+    { title: "Community", description: "Lasting change is only possible through collective action. We work alongside volunteers, adopters, donors, and supporters to create greater impact." },
+    { title: "Dignity", description: "Every life matters. We strive to provide safety, comfort, medical care, and respect to animals at every stage of their journey." },
+    { title: "Commitment", description: "We show up every day with consistency, patience, and dedication — to improve the lives of animals in need." },
   ];
 
   const journey = [
-    { year: "2017", title: "Aashima's Journey Begins", description: "Two community dogs sparked a mission that would eventually transform hundreds of lives." },
-    { year: "2020", title: "COVID Response", description: "While the world shut down, rescue and feeding efforts intensified." },
-    { year: "2024", title: "Permanent Shelter", description: "A dedicated sanctuary opened for senior, injured, and paralysed animals." },
-    { year: "2025", title: "Registered NGO", description: "Aishi For Furries became a registered organisation, expanding impact and long-term care." },
+    { year: "2017", title: "It Begins", up: true, description: "Two community dogs in Gurgaon spark a lifelong mission. Feeding, vaccination and neutering lead to deeper involvement." },
+    { year: "2018", title: "Expanding Reach", up: false, description: "Feeding extended to 40+ dogs. A structured approach to vaccination and sterilisation introduced." },
+    { year: "2019", title: "Community Awareness", up: true, description: "AishiForFurries becomes a trusted neighbourhood welfare initiative bridging feeders, residents, and vets." },
+    { year: "2020", title: "COVID Response", up: false, description: "Groundwork intensified during the pandemic. The first Milaap crowdfunding campaign saved a critical hit-and-run case." },
+    { year: "2021", title: "System Exposure", up: true, description: "Experience with a local NGO offered system exposure, but independent operations resumed to retain agility and ethics." },
+    { year: "2022", title: "Rapid Growth", up: false, description: "Daily feeding reached 100+ dogs. A private rescue boarding facility established for paralysed, senior, and trauma dogs." },
+    { year: "2023", title: "Permanent Rescues", up: true, description: "Rising permanent rescues increased operational costs; donations from friends and family were barely enough to get by." },
+    { year: "2024", title: "NGO Registration", up: false, description: "Formal NGO registration initiated; groundwork began for a dedicated shelter for rescue, rehabilitation, and sterilisation." },
+    { year: "2025", title: "Registered NGO", up: true, description: "Now a registered NGO with 45+ permanent residents. Neutered 90+ dogs, vaccinated 80+ dogs, conducted numerous surgeries." },
   ];
 
-  return (
-    <div className="min-h-screen">
+  const heroReveal = useReveal(0.1);
+  const founderReveal = useReveal(0.1);
+  const timelineReveal = useReveal(0.05);
+  const visionReveal = useReveal(0.1);
+  const valuesReveal = useReveal(0.1);
 
-      {/* About Aishiforfurries */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Built on compassion. Sustained by commitment.</h1>
-          <p className="text-lg md:text-xl text-foreground/80 max-w-3xl leading-relaxed">
-            What began with two community dogs in 2017 has grown into a dedicated animal welfare organization caring for vulnerable dogs across Gurgaon.
-          </p>
+  return (
+    <div style={{ backgroundColor: C }}>
+
+      {/* ── HERO ── */}
+      <section style={{ background: `linear-gradient(135deg, #012825 0%, ${G} 70%)`, padding: "96px 0 80px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: -60, top: -60, width: 320, height: 320, borderRadius: "50%", border: "1px solid rgba(241,231,220,0.06)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", left: -40, bottom: -40, width: 200, height: 200, borderRadius: "50%", border: `1px solid rgba(185,149,114,0.1)`, pointerEvents: "none" }} />
+        <div className="container" ref={heroReveal.ref}>
+          <div style={stagger(0, heroReveal.visible)}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 16 }}>Our Story</p>
+            <h1 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif", maxWidth: 700, marginBottom: 24 }}>
+              Built on compassion.<br />Sustained by commitment.
+            </h1>
+            <p style={{ color: "rgba(241,231,220,0.75)", fontFamily: "'Quicksand',sans-serif", fontSize: "1.1rem", maxWidth: 540, lineHeight: 1.8 }}>
+              What began with two community dogs in 2017 has grown into a dedicated animal welfare organization caring for vulnerable dogs across Gurgaon.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* About Aashima + Timeline */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-10">Aashima's Journey</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-16">
-            <div>
-              <p className="text-foreground/80 mb-4 leading-relaxed text-base md:text-lg">
-                What began with two community dogs in 2017 has grown into Aishi For Furries — a registered animal welfare organization dedicated to rescuing, rehabilitating, and caring for dogs in need.
-              </p>
-              <p className="text-foreground/80 mb-4 leading-relaxed text-base md:text-lg">
-                For Aashima, the mission has always been simple: every animal deserves kindness, medical care, safety, and the opportunity to live with dignity. What started as a personal commitment soon became a lifelong purpose, driven by countless rescues, recoveries, and second chances.
-              </p>
-              <p className="text-foreground/80 mb-4 leading-relaxed text-base md:text-lg">
-                Today, Aishi For Furries cares for over 100 community dogs, houses 45+ permanent residents, and continues to provide medical support, shelter, and rehabilitation to vulnerable animals across Gurgaon.
-              </p>
-              <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-                At its heart, the organization remains rooted in the same belief it began with — that every life matters, and every dog deserves a place where they can heal, belong, and be loved.
-              </p>
+      {/* ── FOUNDER ── */}
+      <section style={{ background: C, padding: "96px 0" }}>
+        <div className="container" ref={founderReveal.ref}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 64, alignItems: "center" }}>
+            <div style={{ position: "relative", ...stagger(0, founderReveal.visible) }}>
+              <div style={{ position: "absolute", inset: -14, border: `2px solid ${GOLD}`, borderRadius: 20, opacity: 0.2 }} />
+              <div style={{ position: "absolute", bottom: -12, right: -12, width: 80, height: 80, background: GOLD, borderRadius: "50% 0 50% 0", opacity: 0.12 }} />
+              <img src={founderImage} alt="Aashima Madan" style={{ width: "100%", aspectRatio: "4/5", objectFit: "cover", borderRadius: 16, display: "block", position: "relative", zIndex: 1 }} />
             </div>
-            <div className="relative h-96 rounded-xl overflow-hidden shadow-lg">
-              <img src={founderImage} alt="Aashima Madan" className="w-full h-full object-cover" />
+            <div style={stagger(1, founderReveal.visible)}>
+              <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>The Person Behind the Mission</p>
+              <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, marginBottom: 28 }}>Aashima's Journey</h2>
+              {[
+                "What began with two community dogs in 2017 has grown into Aishi For Furries — a registered animal welfare organization dedicated to rescuing, rehabilitating, and caring for dogs in need.",
+                "For Aashima, the mission has always been simple: every animal deserves kindness, medical care, safety, and the opportunity to live with dignity. What started as a personal commitment soon became a lifelong purpose, driven by countless rescues, recoveries, and second chances.",
+                "Today, Aishi For Furries cares for over 100 community dogs, houses 45+ permanent residents, and continues to provide medical support, shelter, and rehabilitation to vulnerable animals across Gurgaon.",
+                "At its heart, the organization remains rooted in the same belief it began with — that every life matters, and every dog deserves a place where they can heal, belong, and be loved.",
+              ].map((t, i) => <p key={i} style={{ color: "#3d2e20", marginBottom: 16, lineHeight: 1.85 }}>{t}</p>)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TIMELINE ── */}
+      <section style={{ background: G, padding: "96px 0" }}>
+        <div className="container" ref={timelineReveal.ref}>
+          <div style={{ textAlign: "center", marginBottom: 72 }}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Since 2017</p>
+            <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif" }}>Our Journey</h2>
+          </div>
+
+          {/* DESKTOP — horizontal, alternating up/down */}
+          <div className="hidden md:block" style={{ position: "relative", overflowX: "auto", paddingBottom: 16 }}>
+            {/* centre line */}
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 2, background: `linear-gradient(to right, transparent, rgba(185,149,114,0.5), transparent)`, transform: "translateY(-50%)", zIndex: 0 }} />
+            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, minmax(100px, 1fr))`, gap: 8, position: "relative", minWidth: 800 }}>
+              {journey.map((item, i) => (
+                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", ...stagger(i, timelineReveal.visible) }}>
+                  {/* top text block — only shows when up:true */}
+                  <div style={{ height: 140, display: "flex", alignItems: "flex-end", paddingBottom: 16, width: "100%", justifyContent: "center" }}>
+                    {item.up && (
+                      <div style={{ background: "rgba(241,231,220,0.06)", border: "1px solid rgba(241,231,220,0.12)", borderRadius: 12, padding: "14px 12px", textAlign: "center", width: "100%" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, fontSize: "1.1rem", marginBottom: 4 }}>{item.year}</div>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, color: C, fontSize: "0.75rem", marginBottom: 6 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.7rem", lineHeight: 1.55, margin: 0 }}>{item.description}</p>
+                      </div>
+                    )}
+                  </div>
+                  {/* dot on line */}
+                  <div style={{ width: 14, height: 14, borderRadius: "50%", background: GOLD, border: `3px solid rgba(241,231,220,0.25)`, flexShrink: 0, zIndex: 1, boxShadow: `0 0 12px rgba(185,149,114,0.4)` }} />
+                  {/* bottom text block — only shows when up:false */}
+                  <div style={{ height: 140, display: "flex", alignItems: "flex-start", paddingTop: 16, width: "100%", justifyContent: "center" }}>
+                    {!item.up && (
+                      <div style={{ background: "rgba(241,231,220,0.06)", border: "1px solid rgba(241,231,220,0.12)", borderRadius: 12, padding: "14px 12px", textAlign: "center", width: "100%" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, fontSize: "1.1rem", marginBottom: 4 }}>{item.year}</div>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, color: C, fontSize: "0.75rem", marginBottom: 6 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.7rem", lineHeight: 1.55, margin: 0 }}>{item.description}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Timeline */}
-          <div className="hidden md:block relative">
-            <div className="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 h-0.5 rounded-full" style={{ backgroundColor: BRAND_GREEN, opacity: 0.2 }} />
-            <div className="grid grid-cols-4 gap-6">
-              {journey.map((item, idx) => {
-                const isUp = idx % 2 === 0;
-                return (
-                  <div key={item.year} className="flex flex-col items-center relative">
-                    <div className={`w-full ${isUp ? "mb-8" : "mt-8 order-last"}`}>
-                      <div className="bg-background rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow text-center" style={{ border: `1px solid rgba(1,56,53,0.15)` }}>
-                        <div className="font-bold text-xl mb-2" style={{ color: BRAND_GREEN }}>{item.year}</div>
-                        <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
-                        <p className="text-foreground/60 text-sm leading-relaxed">{item.description}</p>
-                      </div>
-                    </div>
-                    <div className="relative z-10 w-5 h-5 rounded-full shadow-md border-2 border-white flex-shrink-0" style={{ backgroundColor: BRAND_GREEN }} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="md:hidden flex flex-col gap-6 relative">
-            <div className="absolute left-5 top-0 bottom-0 w-0.5" style={{ backgroundColor: BRAND_GREEN, opacity: 0.2 }} />
-            {journey.map((item) => (
-              <div key={item.year} className="flex items-start gap-5 pl-2">
-                <div className="relative z-10 w-5 h-5 rounded-full shadow-md border-2 border-white flex-shrink-0 mt-1" style={{ backgroundColor: BRAND_GREEN }} />
-                <div className="bg-background rounded-xl p-5 shadow-sm flex-1" style={{ border: `1px solid rgba(1,56,53,0.15)` }}>
-                  <div className="font-bold text-lg mb-1" style={{ color: BRAND_GREEN }}>{item.year}</div>
-                  <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-foreground/60 text-sm leading-relaxed">{item.description}</p>
+          {/* MOBILE — vertical timeline */}
+          <div className="md:hidden" style={{ position: "relative", paddingLeft: 28 }}>
+            <div style={{ position: "absolute", left: 5, top: 0, bottom: 0, width: 2, background: `linear-gradient(to bottom, transparent, rgba(185,149,114,0.4), transparent)` }} />
+            {journey.map((item, i) => (
+              <div key={i} style={{ display: "flex", gap: 20, marginBottom: 24, ...stagger(i, timelineReveal.visible) }}>
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: GOLD, flexShrink: 0, marginTop: 5, position: "relative", left: -34, boxShadow: `0 0 8px rgba(185,149,114,0.5)` }} />
+                <div style={{ background: "rgba(241,231,220,0.06)", border: "1px solid rgba(241,231,220,0.12)", borderRadius: 12, padding: "16px", flex: 1, marginLeft: -14 }}>
+                  <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: GOLD, marginBottom: 4, fontSize: "1rem" }}>{item.year} · {item.title}</div>
+                  <p style={{ color: "rgba(241,231,220,0.65)", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
                 </div>
               </div>
             ))}
@@ -110,62 +152,73 @@ export default function About() {
         </div>
       </section>
 
-      {/* Vision */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Vision</h2>
-          <p className="text-foreground/80 leading-relaxed text-base md:text-lg mb-4">
-            A future where every animal is treated with compassion, protected from suffering, and given the opportunity to live with dignity.
-          </p>
-          <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-            We envision a Gurgaon where animal welfare is a shared responsibility, and every dog has access to safety, care, and a second chance.
-          </p>
-        </div>
-      </section>
-
-      {/* Mission */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="container max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
-          <p className="text-foreground/80 leading-relaxed text-base md:text-lg mb-4">
-            To rescue, rehabilitate, and care for vulnerable animals through medical support, shelter, feeding, sterilisation, and adoption initiatives.
-          </p>
-          <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-            Through compassionate action and community involvement, we work to improve the lives of animals in need every day.
-          </p>
-        </div>
-      </section>
-
-      {/* Core Values */}
-      <section className="py-14 md:py-20 bg-background">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Core Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {values.map((value, idx) => (
-              <Card key={idx} className="p-6 hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold mb-3" style={{ color: "var(--card-foreground)" }}>{value.title}</h3>
-                <p style={{ color: "var(--card-foreground)", opacity: 0.8 }}>{value.description}</p>
-              </Card>
+      {/* ── VISION + MISSION ── */}
+      <section style={{ background: C, padding: "96px 0" }}>
+        <div className="container" ref={visionReveal.ref}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 48 }}>
+            {[
+              { label: "Our Vision", text: ["A future where every animal is treated with compassion, protected from suffering, and given the opportunity to live with dignity.", "We envision a Gurgaon where animal welfare is a shared responsibility, and every dog has access to safety, care, and a second chance."] },
+              { label: "Our Mission", text: ["To rescue, rehabilitate, and care for vulnerable animals through medical support, shelter, feeding, sterilisation, and adoption initiatives.", "Through compassionate action and community involvement, we work to improve the lives of animals in need every day."] },
+            ].map((item, i) => (
+              <div key={i} style={{ ...stagger(i, visionReveal.visible) }}>
+                <div style={{ width: 40, height: 3, background: GOLD, borderRadius: 2, marginBottom: 20 }} />
+                <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, marginBottom: 20 }}>{item.label}</h2>
+                {item.text.map((t, j) => <p key={j} style={{ color: "#3d2e20", marginBottom: 14, lineHeight: 1.85 }}>{t}</p>)}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Closing Banner */}
-      <section className="py-14 md:py-20 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Us In Building A Kinder Future</h2>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
-            Whether through a donation, adoption, fostering, or volunteering, every act of kindness helps us reach another animal in need.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/donate"><a><Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-8 py-6 text-lg font-semibold">Donate</Button></a></Link>
-            <Link href="/volunteer"><a><Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg font-semibold">Volunteer</Button></a></Link>
-            <Link href="/adopt"><a><Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg font-semibold">Adopt</Button></a></Link>
+      {/* ── CORE VALUES ── */}
+      <section style={{ background: G, padding: "96px 0" }}>
+        <div className="container" ref={valuesReveal.ref}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>What Drives Us</p>
+            <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif" }}>Core Values</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
+            {values.map((v, i) => (
+              <div key={i} style={{
+                background: "rgba(241,231,220,0.06)", border: "1px solid rgba(241,231,220,0.10)",
+                borderRadius: 14, padding: "32px 24px",
+                transition: "all 0.28s cubic-bezier(0.22,1,0.36,1)",
+                ...stagger(i, valuesReveal.visible),
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(241,231,220,0.11)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-5px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(241,231,220,0.06)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+              >
+                <div style={{ width: 32, height: 2, background: GOLD, borderRadius: 2, marginBottom: 16 }} />
+                <h3 style={{ fontFamily: "'Josefin Sans',sans-serif", color: C, fontWeight: 700, marginBottom: 12, fontSize: "1.1rem" }}>{v.title}</h3>
+                <p style={{ color: "rgba(241,231,220,0.68)", fontSize: "0.9rem", lineHeight: 1.75, margin: 0 }}>{v.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* ── CLOSING BANNER ── */}
+      <section style={{ background: C, padding: "100px 0", textAlign: "center" }}>
+        <div className="container">
+          <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 16 }}>Take Action</p>
+          <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G, maxWidth: 560, margin: "0 auto 24px" }}>Join Us In Building A Kinder Future</h2>
+          <p style={{ color: "#5a3e2b", fontFamily: "'Quicksand',sans-serif", fontSize: "1.05rem", maxWidth: 480, margin: "0 auto 44px", lineHeight: 1.8 }}>
+            Whether through a donation, adoption, fostering, or volunteering, every act of kindness helps us reach another animal in need.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
+            {[{ label: "Donate", href: "/donate" }, { label: "Volunteer", href: "/volunteer" }, { label: "Adopt", href: "/adopt" }].map((btn, i) => (
+              <Link key={i} href={btn.href}>
+                <a style={{ display: "inline-flex", alignItems: "center", gap: 8, background: G, color: C, padding: "14px 32px", borderRadius: 10, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.05em", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(1,56,53,0.15)" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 28px rgba(1,56,53,0.22)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(1,56,53,0.15)"; }}
+                >
+                  {btn.label} <ArrowRight size={14} />
+                </a>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -120,7 +120,7 @@ export default function Impact() {
       </section>
 
       {/* Beyond The Numbers */}
-      <section className="py-14 md:py-20 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Every Number Has A Story</h2>
           <p className="text-lg text-foreground/80 leading-relaxed">
@@ -155,7 +155,7 @@ export default function Impact() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-14 md:py-20 bg-white">
+      <section style={{ background: "#F1E7DC" }}>
         <div className="container">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">What People Say</h2>
           <div className="relative">
