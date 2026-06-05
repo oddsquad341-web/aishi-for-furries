@@ -256,36 +256,36 @@ export default function Home() {
             <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>Since 2017</p>
             <h2 style={{ fontFamily: "'Josefin Sans',sans-serif", color: G }}>Our Journey</h2>
           </div>
-          {/* Desktop — year ON the line, text strictly above or below */}
+          {/* Desktop timeline — fixed heights, year pill guaranteed on line */}
           <div className="hidden md:block" style={{ position: "relative" }}>
-            {/* The horizontal line sits exactly at the midpoint */}
-            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 2, background: `linear-gradient(to right, transparent, rgba(1,56,53,0.3), transparent)`, transform: "translateY(-50%)", zIndex: 0 }} />
-            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, 1fr)`, gap: 8 }}>
+            {/* Line at exactly 120px from top of grid — matches cardH + gap */}
+            <div style={{ position: "absolute", left: 0, right: 0, top: 120, height: 2, background: `linear-gradient(to right, transparent, rgba(1,56,53,0.35), transparent)`, zIndex: 0 }} />
+            <div style={{ display: "grid", gridTemplateColumns: `repeat(${journey.length}, 1fr)`, gap: 8, alignItems: "start" }}>
               {journey.map((item, i) => (
                 <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", ...stg(i, timelineR.visible) }}>
-                  {/* TOP slot — card only if up:true, empty space otherwise */}
-                  <div style={{ flex: 1, width: "100%", display: "flex", alignItems: "flex-end", paddingBottom: 10 }}>
-                    {item.up ? (
-                      <div style={{ background: G, borderRadius: 10, padding: "10px 10px", textAlign: "center", width: "100%", border: "1px solid rgba(241,231,220,0.08)" }}>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.78rem", marginBottom: 3 }}>{item.title}</div>
-                        <p style={{ color: "rgba(241,231,220,0.58)", fontSize: "0.65rem", lineHeight: 1.5, margin: 0 }}>{item.description}</p>
+                  {/* TOP card — exactly 110px tall, sits above the line */}
+                  <div style={{ height: 110, width: "100%", display: "flex", alignItems: "flex-end", paddingBottom: 8 }}>
+                    {item.up && (
+                      <div style={{ background: G, borderRadius: 10, padding: "9px 8px", textAlign: "center", width: "100%", border: "1px solid rgba(241,231,220,0.08)" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.72rem", marginBottom: 3, lineHeight: 1.2 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.6rem", lineHeight: 1.45, margin: 0 }}>{item.description}</p>
                       </div>
-                    ) : <div style={{ height: 80 }} />}
+                    )}
                   </div>
 
-                  {/* YEAR badge sits exactly on the line */}
-                  <div style={{ position: "relative", zIndex: 1, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.78rem", padding: "5px 10px", borderRadius: 999, flexShrink: 0, whiteSpace: "nowrap", boxShadow: "0 2px 12px rgba(185,149,114,0.45)", letterSpacing: "0.02em" }}>
+                  {/* YEAR pill — this IS the line marker, sits at top:120px */}
+                  <div style={{ position: "relative", zIndex: 2, background: GOLD, color: G, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.7rem", padding: "4px 9px", borderRadius: 999, whiteSpace: "nowrap", boxShadow: "0 0 14px rgba(185,149,114,0.5)", letterSpacing: "0.01em", flexShrink: 0 }}>
                     {item.year}
                   </div>
 
-                  {/* BOTTOM slot — card only if up:false, empty space otherwise */}
-                  <div style={{ flex: 1, width: "100%", display: "flex", alignItems: "flex-start", paddingTop: 10 }}>
-                    {!item.up ? (
-                      <div style={{ background: G, borderRadius: 10, padding: "10px 10px", textAlign: "center", width: "100%", border: "1px solid rgba(241,231,220,0.08)" }}>
-                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.78rem", marginBottom: 3 }}>{item.title}</div>
-                        <p style={{ color: "rgba(241,231,220,0.58)", fontSize: "0.65rem", lineHeight: 1.5, margin: 0 }}>{item.description}</p>
+                  {/* BOTTOM card — sits below the line */}
+                  <div style={{ height: 110, width: "100%", display: "flex", alignItems: "flex-start", paddingTop: 8 }}>
+                    {!item.up && (
+                      <div style={{ background: G, borderRadius: 10, padding: "9px 8px", textAlign: "center", width: "100%", border: "1px solid rgba(241,231,220,0.08)" }}>
+                        <div style={{ fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, color: C, fontSize: "0.72rem", marginBottom: 3, lineHeight: 1.2 }}>{item.title}</div>
+                        <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.6rem", lineHeight: 1.45, margin: 0 }}>{item.description}</p>
                       </div>
-                    ) : <div style={{ height: 80 }} />}
+                    )}
                   </div>
                 </div>
               ))}
