@@ -141,14 +141,11 @@ export default function Adopt() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 60, alignItems: "center" }}>
             <div style={{ position: "relative", ...s(0, r4.visible) }}>
               <div style={{ position: "absolute", inset: -12, border: `2px solid ${GOLD}`, borderRadius: 20, opacity: 0.2 }} />
-              <img src={fosterHero} alt="Foster a dog" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 16, display: "block", position: "relative", zIndex: 1 }} />
+              <img src={fosterSideImage} alt="Foster a dog" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 16, display: "block", position: "relative", zIndex: 1 }} />
             </div>
             <div style={s(1, r4.visible)}>
               <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Make a Difference</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 20, flexWrap: "wrap" }}>
-                <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif", margin: 0, flex: 1, minWidth: 200 }}>A Temporary Home.<br />A Lifelong Impact.</h2>
-                <img src={fosterSideImage} alt="Foster" style={{ width: 130, height: 130, objectFit: "cover", borderRadius: 12, flexShrink: 0 }} />
-              </div>
+              <h2 style={{ color: C, fontFamily: "'Josefin Sans',sans-serif", marginBottom: 20 }}>A Temporary Home.<br />A Lifelong Impact.</h2>
               <p style={{ color: "rgba(241,231,220,0.78)", lineHeight: 1.85, marginBottom: 16 }}>Not every rescue is ready for adoption right away. By fostering, you become a crucial part of their journey.</p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Give a dog a safe and loving place to stay", "Help them build confidence and trust", "Support their recovery and rehabilitation", "Food and medical care provided by Aishiforfurries", "Ongoing support from our team"].map((b, i) => (
@@ -169,10 +166,7 @@ export default function Adopt() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 60, alignItems: "center" }}>
             <div style={s(0, r5.visible)}>
               <p style={{ color: GOLD, fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Support From Afar</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 20, flexWrap: "wrap" }}>
-                <h2 style={{ color: G, fontFamily: "'Josefin Sans',sans-serif", margin: 0, flex: 1, minWidth: 200 }}>Love Knows No Distance</h2>
-                <img src={loveKnowsImage} alt="Virtual adoption" style={{ width: 130, height: 130, objectFit: "cover", borderRadius: 12, flexShrink: 0 }} />
-              </div>
+              <h2 style={{ color: G, fontFamily: "'Josefin Sans',sans-serif", marginBottom: 20 }}>Love Knows No Distance</h2>
               <p style={{ color: "#5a3e2b", lineHeight: 1.85, marginBottom: 16 }}>Not everyone can bring a dog home — and that's okay. Through virtual adoption, you can sponsor a rescue dog's daily care while they stay safely with us.</p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Monthly or one-time sponsorship options", "Regular updates about your sponsored dog", "Direct contribution towards their care", "A meaningful way to help, wherever you are"].map((b, i) => (
