@@ -3,7 +3,11 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
+const RED = "#DB453D";
+
 const navItems = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Our Work", href: "/our-work" },
   { label: "Impact", href: "/impact" },
@@ -18,40 +22,31 @@ export default function Navigation() {
   const [location] = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
-
-  useEffect(() => { setIsOpen(false); }, [location]);
+  useEffect(() => setIsOpen(false), [location]);
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-lg" : ""}`}
-      style={{ backgroundColor: "#013835", borderBottom: "1px solid rgba(241,231,220,0.10)" }}>
-      <div className="container flex items-center justify-between h-16 md:h-[68px]">
+    <nav style={{ position: "sticky", top: 0, zIndex: 50, backgroundColor: G, borderBottom: "1px solid rgba(241,231,220,0.10)", boxShadow: scrolled ? "0 4px 24px rgba(1,56,53,0.25)" : "none", transition: "box-shadow 0.3s" }}>
+      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
 
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-2 md:gap-3 no-underline flex-shrink-0">
-            <img src={logo} alt="Aishi For Furries" className="h-9 w-9 md:h-10 md:w-10 object-contain rounded-full" />
-            <span className="text-base md:text-lg font-semibold" style={{ color: "#F1E7DC", fontFamily: "'Josefin Sans', sans-serif", fontWeight: 400 }}>
-              Aishi For Furries
-            </span>
+          <a style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
+            <img src={logo} alt="Aishi For Furries" style={{ height: 40, width: 40, objectFit: "contain", borderRadius: "50%" }} />
+            <span style={{ color: C, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, fontSize: "1rem" }}>Aishi For Furries</span>
           </a>
         </Link>
 
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => {
+        {/* Desktop links */}
+        <div className="hidden md:flex" style={{ alignItems: "center", gap: 2 }}>
+          {navItems.map(item => {
             const active = location === item.href;
             return (
               <Link key={item.href} href={item.href}>
-                <a className="px-3 py-2 text-sm rounded-md transition-all duration-150 no-underline"
-                  style={{
-                    color: active ? "#F1E7DC" : "rgba(241,231,220,0.72)",
-                    backgroundColor: active ? "rgba(241,231,220,0.12)" : "transparent",
-                    fontWeight: active ? 500 : 400,
-                  }}>
+                <a style={{ padding: "6px 12px", fontSize: "0.82rem", fontFamily: "'Josefin Sans',sans-serif", fontWeight: active ? 700 : 500, color: active ? C : "rgba(241,231,220,0.65)", backgroundColor: active ? "rgba(241,231,220,0.12)" : "transparent", borderRadius: 8, textDecoration: "none", letterSpacing: "0.02em", transition: "all 0.15s" }}>
                   {item.label}
                 </a>
               </Link>
@@ -59,44 +54,37 @@ export default function Navigation() {
           })}
         </div>
 
-        {/* Desktop Donate CTA */}
-        <div className="hidden md:flex items-center">
+        {/* Donate CTA */}
+        <div className="hidden md:flex">
           <Link href="/donate">
-            <a className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg text-sm font-semibold no-underline transition-all duration-200 hover:brightness-110"
-              style={{ backgroundColor: "#F1E7DC", color: "#013835" }}>
+            <a style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "9px 20px", backgroundColor: RED, color: "#fff", borderRadius: 8, fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.82rem", letterSpacing: "0.04em", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 2px 12px rgba(219,69,61,0.35)" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 20px rgba(219,69,61,0.45)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 12px rgba(219,69,61,0.35)"; }}
+            >
               💛 Donate Now
             </a>
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-md"
-          style={{ color: "#F1E7DC", background: "none", border: "none" }}
-          aria-label="Toggle menu"
-        >
+        {/* Mobile burger */}
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden" style={{ padding: 8, color: C, background: "none", border: "none" }} aria-label="Toggle menu">
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile drawer */}
       {isOpen && (
-        <div style={{ backgroundColor: "#013835", borderTop: "1px solid rgba(241,231,220,0.12)" }}>
-          <div className="container py-4 flex flex-col gap-1">
-            {navItems.map((item) => (
+        <div style={{ backgroundColor: G, borderTop: "1px solid rgba(241,231,220,0.12)" }}>
+          <div className="container" style={{ paddingTop: 16, paddingBottom: 24, display: "flex", flexDirection: "column", gap: 4 }}>
+            {navItems.map(item => (
               <Link key={item.href} href={item.href}>
-                <a className="block px-4 py-3 rounded-md text-base no-underline"
-                  style={{ color: "rgba(241,231,220,0.85)" }}
-                  onClick={() => setIsOpen(false)}>
+                <a style={{ display: "block", padding: "12px 16px", color: "rgba(241,231,220,0.88)", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 500, fontSize: "1rem", textDecoration: "none", borderRadius: 8, letterSpacing: "0.02em" }} onClick={() => setIsOpen(false)}>
                   {item.label}
                 </a>
               </Link>
             ))}
             <Link href="/donate">
-              <a className="block mt-3 px-4 py-3 rounded-lg text-base font-semibold text-center no-underline"
-                style={{ backgroundColor: "#F1E7DC", color: "#013835" }}
-                onClick={() => setIsOpen(false)}>
+              <a style={{ display: "block", marginTop: 8, padding: "14px 16px", backgroundColor: RED, color: "#fff", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "1rem", textDecoration: "none", borderRadius: 10, textAlign: "center" }} onClick={() => setIsOpen(false)}>
                 💛 Donate Now
               </a>
             </Link>

@@ -1,8 +1,22 @@
 import { Link } from "wouter";
-import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/aishi/raw/circularlogo.png";
 
-const quickLinks = [
+const G = "#013835"; const C = "#F1E7DC"; const GOLD = "#B99572";
+
+const SvgInstagram = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+);
+const SvgFacebook = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
+
+const navLinks = [
+  { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Our Work", href: "/our-work" },
   { label: "Impact", href: "/impact" },
@@ -12,54 +26,60 @@ const quickLinks = [
 
 const involvedLinks = [
   { label: "Donate", href: "/donate" },
-  { label: "Volunteer", href: "/volunteer" },
+  { label: "Partner With Us", href: "/volunteer" },
   { label: "Foster a Dog", href: "/adopt" },
   { label: "Contact Us", href: "/contact" },
 ];
 
+const linkStyle = { color: "rgba(241,231,220,0.6)", textDecoration: "none", fontSize: "0.875rem", fontFamily: "'Quicksand',sans-serif", fontWeight: 500, transition: "color 0.15s" };
+
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#0A1E1D", color: "#F1E7DC" }}>
-      <div className="container py-14 md:py-20">
+    <footer style={{ backgroundColor: "#0A1E1D" }}>
+      <div className="container" style={{ paddingTop: 72, paddingBottom: 48 }}>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "40px 32px", marginBottom: 56 }}>
 
           {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <img src={logo} alt="Aishi For Furries" className="h-10 w-10 object-contain rounded-full" style={{ border: "1.5px solid rgba(241,231,220,0.25)" }} />
-              <span style={{ fontFamily: "'Josefin Sans', sans-serif", fontSize: "1.05rem", color: "#F1E7DC" }}>
-                Aishi For Furries
-              </span>
-            </div>
-            <p className="text-sm mb-5 leading-relaxed" style={{ color: "rgba(241,231,220,0.6)", maxWidth: "240px" }}>
+          <div style={{ gridColumn: "span 1" }}>
+            <Link href="/">
+              <a style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 16 }}>
+                <img src={logo} alt="Aishi For Furries" style={{ height: 42, width: 42, objectFit: "contain", borderRadius: "50%", border: "1.5px solid rgba(241,231,220,0.2)" }} />
+                <span style={{ fontFamily: "'Josefin Sans',sans-serif", fontSize: "1rem", color: C, fontWeight: 600 }}>Aishi For Furries</span>
+              </a>
+            </Link>
+            <p style={{ color: "rgba(241,231,220,0.55)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: 24, maxWidth: 220, fontFamily: "'Quicksand',sans-serif" }}>
               Rescuing, rehabilitating, and caring for Gurgaon's most vulnerable dogs since 2017.
             </p>
-            <div className="flex gap-3">
+            {/* Social icons — explicit SVG so colour always renders */}
+            <div style={{ display: "flex", gap: 10 }}>
               {[
-                { href: "https://www.instagram.com/aishiforfurries/", icon: <Instagram size={15} /> },
-                { href: "https://www.facebook.com/aishiforfurries", icon: <Facebook size={15} /> },
+                { href: "https://www.instagram.com/aishiforfurries/", icon: <SvgInstagram />, label: "Instagram" },
+                { href: "https://www.facebook.com/aishiforfurries", icon: <SvgFacebook />, label: "Facebook" },
               ].map((s, i) => (
-                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 hover:bg-white/10"
-                  style={{ border: "1px solid rgba(241,231,220,0.2)", color: "#F1E7DC" }}>
+                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 38, height: 38, borderRadius: "50%", border: "1.5px solid rgba(241,231,220,0.25)", color: C, transition: "all 0.2s", flexShrink: 0 }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(241,231,220,0.12)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(241,231,220,0.5)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(241,231,220,0.25)"; }}
+                >
                   {s.icon}
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* Nav */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "rgba(241,231,220,0.4)" }}>Navigation</p>
-            <ul className="flex flex-col gap-2.5">
-              {quickLinks.map(l => (
+            <p style={{ fontSize: "0.68rem", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,231,220,0.35)", marginBottom: 18 }}>Navigation</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
+              {navLinks.map(l => (
                 <li key={l.href}>
                   <Link href={l.href}>
-                    <a className="text-sm no-underline transition-colors duration-150 hover:text-white" style={{ color: "rgba(241,231,220,0.65)" }}>
-                      {l.label}
-                    </a>
+                    <a style={linkStyle}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = C}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(241,231,220,0.6)"}
+                    >{l.label}</a>
                   </Link>
                 </li>
               ))}
@@ -68,14 +88,15 @@ export default function Footer() {
 
           {/* Get Involved */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "rgba(241,231,220,0.4)" }}>Get Involved</p>
-            <ul className="flex flex-col gap-2.5">
+            <p style={{ fontSize: "0.68rem", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,231,220,0.35)", marginBottom: 18 }}>Get Involved</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
               {involvedLinks.map(l => (
                 <li key={l.href}>
                   <Link href={l.href}>
-                    <a className="text-sm no-underline transition-colors duration-150 hover:text-white" style={{ color: "rgba(241,231,220,0.65)" }}>
-                      {l.label}
-                    </a>
+                    <a style={linkStyle}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = C}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(241,231,220,0.6)"}
+                    >{l.label}</a>
                   </Link>
                 </li>
               ))}
@@ -84,32 +105,28 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "rgba(241,231,220,0.4)" }}>Contact</p>
-            <ul className="flex flex-col gap-3">
-              <li>
-                <a href="tel:+919873218040" className="flex items-center gap-2.5 text-sm no-underline" style={{ color: "rgba(241,231,220,0.65)" }}>
-                  <Phone size={13} className="flex-shrink-0" /> +91 9873218040
-                </a>
-              </li>
-              <li>
-                <a href="mailto:aishiforfurries@gmail.com" className="flex items-start gap-2.5 text-sm no-underline break-all" style={{ color: "rgba(241,231,220,0.65)" }}>
-                  <Mail size={13} className="flex-shrink-0 mt-0.5" /> aishiforfurries@gmail.com
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(241,231,220,0.65)" }}>
-                <MapPin size={13} className="flex-shrink-0" /> Gurgaon, Haryana
-              </li>
-            </ul>
+            <p style={{ fontSize: "0.68rem", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,231,220,0.35)", marginBottom: 18 }}>Contact</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <a href="tel:+919873218040" style={{ display: "flex", alignItems: "center", gap: 10, ...linkStyle }}>
+                <Phone size={13} style={{ color: GOLD, flexShrink: 0 }} /> +91 9873218040
+              </a>
+              <a href="mailto:aishiforfurries@gmail.com" style={{ display: "flex", alignItems: "flex-start", gap: 10, ...linkStyle, wordBreak: "break-all" }}>
+                <Mail size={13} style={{ color: GOLD, flexShrink: 0, marginTop: 3 }} /> aishiforfurries@gmail.com
+              </a>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, ...linkStyle }}>
+                <MapPin size={13} style={{ color: GOLD, flexShrink: 0 }} /> Gurgaon, Haryana
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-center md:text-left" style={{ borderTop: "1px solid rgba(241,231,220,0.10)" }}>
-          <p className="text-xs" style={{ color: "rgba(241,231,220,0.35)" }}>
-            © 2025 Aishi For Furries. Registered NGO · Gurgaon, Haryana
+        {/* Divider + bottom bar */}
+        <div style={{ borderTop: "1px solid rgba(241,231,220,0.08)", paddingTop: 28, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, textAlign: "center" }}>
+          <p style={{ fontSize: "0.78rem", color: "rgba(241,231,220,0.3)", fontFamily: "'Quicksand',sans-serif" }}>
+            © 2025 Aishi For Furries · Registered NGO · Gurgaon, Haryana
           </p>
-          <p className="text-xs" style={{ color: "rgba(241,231,220,0.22)" }}>
-            Every life matters. Every dog deserves a second chance.
+          <p style={{ fontSize: "0.7rem", color: "rgba(241,231,220,0.18)", fontFamily: "'Josefin Sans',sans-serif", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            Every life matters · Every dog deserves a second chance
           </p>
         </div>
       </div>
