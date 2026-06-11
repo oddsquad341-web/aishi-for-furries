@@ -114,7 +114,7 @@ export default function Footer() {
                 <Mail size={13} style={{ color: GOLD, flexShrink: 0, marginTop: 3 }} /> aishiforfurries@gmail.com
               </a>
               <div style={{ display: "flex", alignItems: "center", gap: 10, ...linkStyle }}>
-                <MapPin size={13} style={{ color: GOLD, flexShrink: 0 }} /> Gurgaon, Haryana
+                <MapPin size={13} style={{ color: GOLD, flexShrink: 0 }} /> Bhelpa Green, Bhondsi, Haryana
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function Footer() {
         {/* Divider + bottom bar */}
         <div style={{ borderTop: "1px solid rgba(241,231,220,0.08)", paddingTop: 28, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, textAlign: "center" }}>
           <p style={{ fontSize: "0.78rem", color: "rgba(241,231,220,0.3)", fontFamily: "'Quicksand',sans-serif" }}>
-            © 2025 Aishi For Furries · Registered NGO · Gurgaon, Haryana
+            © 2025 Aishi For Furries · Registered NGO · Bhelpa Green, Bhondsi, Haryana
           </p>
           <p style={{ fontSize: "0.7rem", color: "rgba(241,231,220,0.18)", fontFamily: "'Josefin Sans',sans-serif", letterSpacing: "0.06em", textTransform: "uppercase" }}>
             Every life matters · Every dog deserves a second chance
