@@ -35,7 +35,9 @@ export default function Navigation() {
         {/* Logo */}
         <Link href="/">
           <a style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
-            <img src={logo} alt="Aishi For Furries" style={{ height: 48, width: 48, objectFit: "contain", borderRadius: "50%", filter: "brightness(0) invert(1)" }} />
+            <div style={{ width: 56, height: 56, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}>
+              <img src={logo} alt="Aishi For Furries" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", filter: "brightness(0) invert(1)" }} />
+            </div>
             <span style={{ color: "#fff", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 600, fontSize: "1.1rem" }}>Aishi For Furries</span>
           </a>
         </Link>
