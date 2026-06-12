@@ -97,7 +97,7 @@ export default function Home() {
         <img className="hero-bg" src={heroImage} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "115%", objectFit: "cover", willChange: "transform" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(1,56,53,0.78) 0%, rgba(0,0,0,0.28) 70%)" }} />
         <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: `linear-gradient(to bottom, transparent, ${GOLD}, transparent)` }} />
-        <div className="container" style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 72 }}>
+        <div className="container" style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 48 }}>
           {/* eyebrow */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(241,231,220,0.10)", border: "1px solid rgba(241,231,220,0.22)", borderRadius: 999, padding: "6px 14px", marginBottom: 20, width: "fit-content", opacity: heroVisible ? 1 : 0, transform: heroVisible ? "none" : "translateY(10px)", transition: "all 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s" }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: GOLD, display: "inline-block" }} />

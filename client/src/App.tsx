@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import LeadPopup from "./components/LeadPopup";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import OurWork from "./pages/OurWork";
@@ -88,6 +89,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <FloatingWhatsApp />
+          <LeadPopup />
           <div className="flex flex-col min-h-screen">
             <Router />
           </div>
