@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
-const G = "#013835"; const C = "#F1E7DC"; const RED = "#DB453D";
+const G = "#013835"; const RED = "#DB453D";
+
+const SERVICE_ID = "service_z4b3tn6";
+const TEMPLATE_ID = "template_4ohnyuk";
+const PUBLIC_KEY = "mSk_n5deGa0Fwcb3u";
 
 export default function LeadPopup() {
   const [visible, setVisible] = useState(false);
@@ -9,9 +14,9 @@ export default function LeadPopup() {
   const [contact, setContact] = useState("");
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // Show after 2s, only once per session
     if (sessionStorage.getItem("popup_seen")) return;
     const t = setTimeout(() => setVisible(true), 2000);
     return () => clearTimeout(t);
@@ -25,13 +30,22 @@ export default function LeadPopup() {
   const submit = async () => {
     if (!name.trim() || !contact.trim()) return;
     setSending(true);
-    const phone = "919873212040";
-    const msg = encodeURIComponent(`New visitor from Aishi For Furries website!\nName: ${name}\nContact: ${contact}`);
-    // Open WhatsApp with pre-filled message to the rescue number
-    window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
-    setSending(false);
-    setSent(true);
-    setTimeout(() => { setVisible(false); sessionStorage.setItem("popup_seen", "1"); }, 1800);
+    setError("");
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        { name: name.trim(), contact: contact.trim() },
+        PUBLIC_KEY
+      );
+      setSent(true);
+      sessionStorage.setItem("popup_seen", "1");
+      setTimeout(close, 2000);
+    } catch (e) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   if (!visible) return null;
@@ -41,12 +55,10 @@ export default function LeadPopup() {
       <div style={{ background: "#fff", borderRadius: 18, padding: "36px 32px 32px", maxWidth: 420, width: "100%", position: "relative", boxShadow: "0 24px 64px rgba(0,0,0,0.25)", animation: "popIn 0.35s cubic-bezier(0.22,1,0.36,1)" }}>
         <style>{`@keyframes popIn { from { opacity:0; transform:scale(0.88) translateY(20px); } to { opacity:1; transform:none; } }`}</style>
 
-        {/* Close */}
         <button onClick={close} style={{ position: "absolute", top: 14, right: 14, background: "rgba(1,56,53,0.07)", border: "none", borderRadius: "50%", width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: G }}>
           <X size={16} />
         </button>
 
-        {/* Logo mark */}
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: G, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, fontSize: "1.4rem" }}>🐾</div>
 
         {!sent ? (
@@ -69,14 +81,17 @@ export default function LeadPopup() {
                 placeholder="Email or phone number"
                 value={contact}
                 onChange={e => setContact(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && submit()}
                 style={{ padding: "12px 14px", borderRadius: 10, border: "1px solid rgba(1,56,53,0.2)", fontFamily: "'Quicksand',sans-serif", fontSize: "0.9rem", outline: "none", color: "#111", background: "#FAFAF8" }}
               />
             </div>
 
+            {error && <p style={{ color: RED, fontSize: "0.8rem", marginBottom: 10, fontFamily: "'Quicksand',sans-serif" }}>{error}</p>}
+
             <button
               onClick={submit}
               disabled={sending || !name.trim() || !contact.trim()}
-              style={{ width: "100%", background: !name.trim() || !contact.trim() ? "rgba(219,69,61,0.45)" : RED, color: "#fff", border: "none", borderRadius: 10, padding: "13px 0", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.95rem", letterSpacing: "0.04em", cursor: !name.trim() || !contact.trim() ? "not-allowed" : "pointer", transition: "background 0.2s" }}>
+              style={{ width: "100%", background: (!name.trim() || !contact.trim()) ? "rgba(219,69,61,0.45)" : RED, color: "#fff", border: "none", borderRadius: 10, padding: "13px 0", fontFamily: "'Josefin Sans',sans-serif", fontWeight: 700, fontSize: "0.95rem", letterSpacing: "0.04em", cursor: (!name.trim() || !contact.trim()) ? "not-allowed" : "pointer", transition: "background 0.2s" }}>
               {sending ? "Sending…" : "Submit"}
             </button>
 
