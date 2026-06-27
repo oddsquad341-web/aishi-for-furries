@@ -8,6 +8,8 @@ const SERVICE_ID = "service_z4b3tn6";
 const TEMPLATE_ID = "template_4ohnyuk";
 const PUBLIC_KEY = "mSk_n5deGa0Fwcb3u";
 
+emailjs.init(PUBLIC_KEY);
+
 export default function LeadPopup() {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("");
@@ -41,8 +43,8 @@ export default function LeadPopup() {
       setSent(true);
       sessionStorage.setItem("popup_seen", "1");
       setTimeout(close, 2000);
-    } catch (e) {
-      setError("Something went wrong. Please try again.");
+    } catch (e: any) {
+      setError(`Failed: ${e?.text || e?.message || "Unknown error"}`);
     } finally {
       setSending(false);
     }
