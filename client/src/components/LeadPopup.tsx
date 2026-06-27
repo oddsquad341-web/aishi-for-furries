@@ -5,7 +5,7 @@ import emailjs from "@emailjs/browser";
 const G = "#013835"; const RED = "#DB453D";
 
 const SERVICE_ID = "service_dn24sam";
-const TEMPLATE_ID = "template_4ohnyuk";
+const TEMPLATE_ID = "template_xawlzoi";
 const PUBLIC_KEY = "mSk_n5deGa0Fwcb3u";
 
 emailjs.init(PUBLIC_KEY);
