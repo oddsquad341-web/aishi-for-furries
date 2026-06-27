@@ -35,7 +35,7 @@ export default function LeadPopup() {
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
-        { name: name.trim(), contact: contact.trim() },
+        { name: name.trim(), message: `Contact: ${contact.trim()}` },
         PUBLIC_KEY
       );
       setSent(true);
